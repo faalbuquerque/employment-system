@@ -1,25 +1,18 @@
-# README
+# Sistema de Empregos
+*Projeto Final – TreinaDev 05 - Etapa 01*
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+O projeto consiste na criação de uma plataforma Web para que pessoas dos
+departamentos de RH de empresas criem vagas e sejam capazes de gerenciar todo processo
+de forma colaborativa. Além disso, a plataforma funciona como um site de busca de
+oportunidades para os visitantes. Um visitante pode conhecer empresas, ver suas vagas
+disponíveis e aplicar para estas vagas.
 
-Things you may want to cover:
+## Tecnologias utilizadas
 
-* Ruby version
+* Ruby version 2.7.2
 
-* System dependencies
+* Rspec
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+* Capybara
 
 * ...
-# employment-system
