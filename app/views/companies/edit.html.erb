@@ -1,0 +1,40 @@
+<%= link_to 'Voltar', root_path %>
+
+<% @company.errors.any? do %>
+  <% @company.errors.full_messages.each do |message| %>
+  <p><%= message %></p>
+  <% end %>
+<% end %>
+
+<h1>Atualizar Empresa</h1>
+
+<%= form_with model: @company, local: true do |form| %>
+
+  <p><%= form.label :name, 'Nome' %>
+  <%= form.text_field :name %></p>
+
+  <p><%= form.label :logo, 'Upload de imagem' %>
+  <%= form.text_field :logo %></p>
+
+  <p><%= form.label :address, 'Endereço' %>
+  <%= form.text_field :address %></p>
+
+  <p><%= form.label :cnpj, 'CNPJ' %>
+  <%= form.text_field :cnpj %></p>
+
+  <p><%= form.label :site, 'Site' %>
+  <%= form.url_field :site %></p>
+
+  <p><%= form.submit %></p>
+<% end %>
+
+<%= link_to 'Adicionar redes sociais', new_social_network_path %>
+
+<% @social_networks.each do |social_network| %>
+  <p>
+    <%= link_to social_network.name, social_network %> |  
+    <%= social_network.url %> | 
+    <%= link_to 'Editar', edit_social_network_path(social_network) %> | 
+    <%= link_to 'Apagar', social_network, method: :delete %>
+  </p>
+<% end %>

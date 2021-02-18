@@ -1,24 +1,24 @@
 require 'rails_helper'
 
 feature 'Collaborator edit company data' do
-  xscenario 'successfully' do
+  scenario 'successfully' do
     company = Company.create!(name: 'teste')
-    admin = Collaborator.create!(email: 'other@test.com', password: 'password', company: company, admin: 1)
+    admin = Collaborator.create!(email: 'other@test.com', password: 'password', 
+                                 company: company, admin: 1)
 
     login_as admin, scope: :collaborator
-    visit root_path
-    
-    click_on 'Preencher informações da Empresa'
 
-    fill_in 'name', with: 'Empresa Teste'
-    fill_in 'logo', with: 'imagem@link.com'
-    fill_in 'address', with: 'Rua lalala, 11'
-    fill_in 'cnpj', with: '32197584871'
-    fill_in 'site', with: 'teste.com.br'
-    click_on 'Salvar'
+    visit root_path
+    click_on 'Atualizar Empresa'
+
+    fill_in 'Nome', with: 'Empresa Teste'
+    fill_in 'Upload de imagem', with: 'imagem@link.com'
+    fill_in 'Endereço', with: 'Rua lalala, 11'
+    fill_in 'CNPJ', with: '32197584871'
+    fill_in 'Site', with: 'http://teste.com.br'
+    click_on 'Atualizar Company'
 
     expect(page).to have_content('Voltar')
-    expect(page).to have_content('Edite sua empresa')
     expect(page).to have_content('Empresa Test')
     expect(page).to have_content('imagem@link.com')
     expect(page).to have_content('Rua lalala, 11')
@@ -26,37 +26,58 @@ feature 'Collaborator edit company data' do
     expect(page).to have_content('teste.com.br')
   end
 
-  xscenario 'name field blank' do
+  scenario 'name field blank' do
     company = Company.create!(name: 'teste')
-    user = Collaborator.create!(email: 'other@test.com', password: 'password', company: company)
+    user = Collaborator.create!(email: 'other@test.com', password: 'password', 
+                                company: company, admin: 1)
 
     login_as user, scope: :collaborator
+
     visit root_path
-    click_on 'Cadastrar Empresa'
+    click_on 'Atualizar Empresa'
 
-    fill_in 'name', with: ''
-    click_on 'Cadastrar'
+    fill_in 'Nome', with: ''
+    click_on 'Atualizar Company'
 
-    expect(page).to have_content('name não pode ficar em branco')
+    expect(page).to have_content('Name não pode ficar em branco')
   end
 
-  xscenario 'social networks field' do
+  scenario 'successfully, social networks field' do
     company = Company.create!(name: 'teste')
-    user = Collaborator.create!(email: 'other@test.com', password: 'password', company: company)
+    user = Collaborator.create!(email: 'other@test.com', password: 'password', 
+                                company: company, admin: 1)
 
     login_as user, scope: :collaborator
     visit root_path
-    click_on 'Preencher informações da Empresa'
 
-    click_on 'Adicionar rede sociail'
+    click_on 'Atualizar Empresa'
+    click_on 'Adicionar redes sociais'
 
-    fill_in 'name', with: 'Instagram'
-    fill_in 'url', with: 'http://teste.com'
+    fill_in 'Nome', with: 'Instagram'
+    fill_in 'URL', with: 'http://teste.com'
+    click_on 'Criar Social network'
 
-    click_on 'Salvar'
-
-    expect(page).to have_current_path(edit_company_path(company))
+    expect(page).to have_content('Voltar')
     expect(page).to have_content('Instagram')
     expect(page).to have_content('http://teste.com')
+  end
+
+  scenario 'field blank, social networks field' do
+    company = Company.create!(name: 'teste')
+    user = Collaborator.create!(email: 'other@test.com', password: 'password', 
+                                company: company, admin: 1)
+
+    login_as user, scope: :collaborator
+    visit root_path
+
+    click_on 'Atualizar Empresa'
+    click_on 'Adicionar redes sociais'
+
+    fill_in 'Nome', with: ''
+    fill_in 'URL', with: ''
+    click_on 'Criar Social network'
+
+    expect(page).to have_content('Name não pode ficar em branco')
+    expect(page).to have_content('Url não pode ficar em branco')
   end
 end

@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   devise_for :candidates, path: 'candidates'
 
   #devise_for :collaborators, controllers: { registrations: 'collaborators/registrations' }
+
+  resources :companies
+
+  resources :social_networks
 end
