@@ -2,19 +2,7 @@
 
 <h2>Rede Social</h2>
 
-<% @social_network.errors.any? do %>
-  <% @social_network.errors.full_messages.each do |message| %>
-    <p><%= message %></p>
-  <% end %>
-<% end %>
-
-<%= form_with model: @social_network, local: true do |form| %>
-
-  <p><%= form.label :name, 'Nome' %>
-  <%= form.text_field :name %></p>
-
-  <p><%= form.label :url, 'URL' %>
-  <%= form.url_field :url %></p>
-
-  <p><%= form.submit %></p>
-<% end %>
+<p><%= @social_network.name %></p>
+<p><%= @social_network.url %></p>
+<p><%= link_to 'Editar', edit_social_network_path(@social_network) %> | 
+<%= link_to 'Apagar', @social_network, method: :delete %></p>

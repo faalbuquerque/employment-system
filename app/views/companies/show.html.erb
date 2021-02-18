@@ -7,3 +7,12 @@
 <p><%= @company.address %></p>
 <p><%= @company.cnpj %></p>
 <p><%= @company.site %></p>
+
+<% @company.social_networks.each do |network| %>
+  <p><%= network.name %> || 
+  <%= network.url %></p>
+<% end %>
+
+<p>
+  <%= link_to 'Editar Empresa', edit_company_path(current_collaborator.company) %>
+</p>

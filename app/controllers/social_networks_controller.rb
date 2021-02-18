@@ -1,5 +1,6 @@
 class SocialNetworksController < ApplicationController
   before_action :authenticate_collaborator!
+  before_action :find_social_networks, only: %i[show edit update destroy] 
 
   def new
     @social_network = current_collaborator.company.social_networks.new
@@ -13,22 +14,18 @@ class SocialNetworksController < ApplicationController
   end
 
   def show
-    @social_network = current_collaborator.company.social_networks.find(params[:id])
   end
 
   def edit
-    @social_network = current_collaborator.company.social_networks.find(params[:id])
   end
 
   def update
-    @social_network = current_collaborator.company.social_networks.find(params[:id])
     return redirect_to edit_company_path(current_collaborator.company) if @social_network.update(social_network_params)
 
     render :edit
   end
 
   def destroy
-    @social_network = current_collaborator.company.social_networks.find(params[:id])
     return redirect_to edit_company_path(current_collaborator.company) if @social_network.delete
 
     render :edit
@@ -38,5 +35,9 @@ class SocialNetworksController < ApplicationController
 
   def social_network_params
     params.require(:social_network).permit(:name, :url, :company_id)
+  end
+
+  def find_social_networks
+    @social_network = current_collaborator.company.social_networks.find(params[:id])
   end
 end

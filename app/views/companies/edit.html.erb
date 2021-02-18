@@ -38,3 +38,8 @@
     <%= link_to 'Apagar', social_network, method: :delete %>
   </p>
 <% end %>
+
+<p>
+  <% alert_prompt = 'Tanto empresa quanto colaboradores serão apagados, tem certeza que quer continuar?' %>
+  <%= link_to 'Apagar Empresa', company_path(current_collaborator.company), data: { confirm: alert_prompt }, method: :delete %>
+</p>
