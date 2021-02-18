@@ -16,21 +16,21 @@ feature 'Collaborator creates account with company email' do
     expect(page).to have_content('Login efetuado com sucesso')
     expect(page).to have_content('Acesso de Administrador')
     expect(page).to have_content('Empresa: test')
-    expect(page).to have_link('Adicionar/Editar Empresa')
+    expect(page).to have_link('Preencher informações da Empresa')
   end
 
   scenario 'successfully, others non-admins collaborators' do
-    company = Company.create!(name: 'teste')
-    Collaborator.create!(email: 'test@test.com', password: 'password', company: company)
-    user = Collaborator.create!(email: 'other@test.com', password: 'password', company: company)
+    company = Company.create!(name: 'test')
+    user_admin = Collaborator.create!(email: 'test_admin@test.com', password: 'password', company: company)
+    non_admin = Collaborator.create!(email: 'test_standard@test.com', password: 'password', company: company)
 
-    login_as user, scope: :collaborator
-    visit root_path(user)
+    login_as non_admin, scope: :collaborator
+    visit root_path
 
     expect(page).to have_content('Empresa: test')
     expect(page).to have_content('Acesso de Colaborador')
-    expect(page).to_not have_content('Admin')
-    expect(page).to_not have_link('Adicionar/Editar Empresa')
+    expect(page).to_not have_content('Acesso de Administrador')
+    expect(page).to_not have_link('Preencher informações da Empresa')
   end
 
   scenario 'is already registered' do

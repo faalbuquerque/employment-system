@@ -13,11 +13,11 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    return redirect_to root_path unless collaborator_signed_in? && current_collaborator.admin.equal?(1)
+    return redirect_to root_path unless is_admin?
   end
 
   def is_admin?
-    !!current_collaborator.admin.equal?(1) if collaborator_signed_in?
+    !!(collaborator_signed_in? && current_collaborator.admin.equal?(1))
   end
 
 end
