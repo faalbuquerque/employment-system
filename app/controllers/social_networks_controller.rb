@@ -3,12 +3,12 @@ class SocialNetworksController < ApplicationController
   before_action :find_social_networks, only: %i[show edit update destroy] 
 
   def new
-    @social_network = current_collaborator.company.social_networks.new
+    @social_network = current_company.social_networks.new
   end
 
   def create
-    @social_network = current_collaborator.company.social_networks.new(social_network_params)
-    return redirect_to edit_company_path(current_collaborator.company) if @social_network.save
+    @social_network = current_company.social_networks.new(social_network_params)
+    return redirect_to edit_company_path(current_company) if @social_network.save
 
     render :new
   end
@@ -20,13 +20,13 @@ class SocialNetworksController < ApplicationController
   end
 
   def update
-    return redirect_to edit_company_path(current_collaborator.company) if @social_network.update(social_network_params)
+    return redirect_to edit_company_path(current_company) if @social_network.update(social_network_params)
 
     render :edit
   end
 
   def destroy
-    return redirect_to edit_company_path(current_collaborator.company) if @social_network.delete
+    return redirect_to edit_company_path(current_company) if @social_network.delete
 
     render :edit
   end
@@ -38,6 +38,10 @@ class SocialNetworksController < ApplicationController
   end
 
   def find_social_networks
-    @social_network = current_collaborator.company.social_networks.find(params[:id])
+    @social_network = current_company.social_networks.find(params[:id])
+  end
+
+  def current_company
+    current_collaborator.company
   end
 end
