@@ -17,6 +17,24 @@ class JobsController < ApplicationController
     @job = current_collaborator.company.jobs.find(params[:id])
   end
 
+  def edit
+    @job = current_collaborator.company.jobs.find(params[:id])
+  end
+
+  def update
+    @job = current_collaborator.company.jobs.find(params[:id])
+    return redirect_to @job if @job.update(job_params)
+
+    render :edit
+  end
+
+  def destroy
+    @job = current_collaborator.company.jobs.find(params[:id])
+    return redirect_to current_collaborator.company if @job.delete
+  
+    render current_collaborator.company.jobs
+  end
+
   private
 
   def job_params

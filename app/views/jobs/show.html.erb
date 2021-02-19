@@ -9,3 +9,5 @@
 <p>Data Limite: <%= I18n.localize(@job.date_limit) %></p>
 <p>Quantidade de vagas: <%= @job.quantity %></p>
 <p>Status: <%= @job.status %></p>
+
+<p><%= link_to 'Editar job', edit_job_path(@job) %></p>

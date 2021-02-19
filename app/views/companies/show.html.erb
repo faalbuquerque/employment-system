@@ -12,8 +12,21 @@
   <p><%= network.name %> || 
   <%= network.url %></p>
 <% end %>
-<hr>
 
 <p>
   <%= link_to 'Cadastrar Job', new_job_path %>
 </p>
+<hr>
+<% current_collaborator.company.jobs.each do |job| %>
+  <p>Vaga: <%= link_to job.title_job, job_path(job) %></p>
+  <p>Descrição: <%= job.description %></p>
+  <p>
+    Salario: 
+    <%= number_to_currency(job.salary_range, precision: 2, separator: ',') %>
+  </p>
+  <p>Nivel: <%= job.level %></p>
+
+  <p><%= link_to 'Editar job', edit_job_path(job) %></p>
+  <p><%= link_to 'Apagar', job_path(job), method: :delete %></p>
+  <hr>
+<% end %>
