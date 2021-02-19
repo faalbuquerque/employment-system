@@ -21,10 +21,10 @@ feature 'Collaborator creates company and registers' do
 
   scenario 'successfully, register others non-admins' do
     company = Company.create!(name: 'test')
-    user_admin = Collaborator.create!(email: 'test_admin@test.com', password: 'password',
-                                      company: company)
-    non_admin = Collaborator.create!(email: 'test_standard@test.com', password:'password',
-                                     company: company)
+    user_admin = Collaborator.create!(email: 'test_admin@test.com', 
+                                      password: 'password', company: company)
+    non_admin = Collaborator.create!(email: 'test_standard@test.com',
+                                     password:'password', company: company)
 
     login_as non_admin, scope: :collaborator
     visit root_path
@@ -37,7 +37,7 @@ feature 'Collaborator creates company and registers' do
 
   scenario 'is already registered' do
     company = Company.create!(name: 'teste')
-    Collaborator.create!(email: 'test@test.com', password: 'password', 
+    Collaborator.create!(email: 'test@test.com', password: 'password',
                          company: company)
 
     visit root_path

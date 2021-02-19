@@ -1,0 +1,42 @@
+<%= link_to 'Voltar', company_path(current_collaborator.company) %>
+
+<h2>Cadastrar Vaga de Emprego</h2>
+
+<% @job.errors.any? do %>
+  <% @job.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %> 
+
+<%= form_with model: @job, local: true do |form| %>
+
+  <p><%= form.label :title_job, 'Nome' %>
+  <%= form.text_field :title_job %></p>
+
+  <p><%= form.label :description, 'Descrição' %>
+  <%= form.text_field :description %></p>
+
+  <p><%= form.label :salary_range, 'Salario' %>
+  <%= form.number_field :salary_range %></p>
+
+  <p>
+    <%= form.label :level, 'Nivel' %>
+    <%= form.select :level, Job.levels.map { |key, value| [key.humanize, key] } %>
+  </p>
+
+  <p><%= form.label :requisite, 'Requisitos' %>
+  <%= form.text_field :requisite %></p>
+
+  <p><%= form.label :date_limit, 'Data limite' %>
+  <%= form.date_field :date_limit %></p>
+
+  <p><%= form.label :quantity, 'Quantidade de vagas' %>
+  <%= form.number_field :quantity %></p>
+
+  <p>
+    <%= form.label :status, 'Status' %>
+    <%= form.select :status, Job.statuses.map { |key, value| [key.humanize, key] } %>
+  </p>
+
+  <p><%= form.submit %></p>
+<% end %>

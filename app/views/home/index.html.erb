@@ -18,6 +18,8 @@
   <p>Acesso de Colaborador</p>
 
   <cite>Boas vindas <%= current_collaborator.email %></cite>
-  <p>Empresa: <%= current_collaborator.company.name %></p>
+  <p>
+    Empresa: <%= link_to current_collaborator.company.name, company_path(current_collaborator.company) %>
+  </p>
 
 <% end %>

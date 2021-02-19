@@ -18,7 +18,7 @@ feature 'Admin collaborator delete company' do
 
   scenario 'failure, already destroyed' do
     company = Company.create!(name: 'test')
-    admin = Collaborator.create!(email: 'tester@test.com', password: 'password', 
+    admin = Collaborator.create!(email: 'tester@test.com', password: 'password',
                                  company: company, admin: 1)
 
     login_as admin, scope: :collaborator
