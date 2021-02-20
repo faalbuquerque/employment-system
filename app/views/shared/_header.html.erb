@@ -8,6 +8,14 @@
     <%= link_to "Logout", destroy_collaborator_session_path, method: :delete %>
   </p>
 
+<% elsif candidate_signed_in? %>
+
+  <p>
+    <%= current_candidate.email %> | 
+    <%= link_to "Logout", destroy_collaborator_session_path, method: :delete %>
+  </p>
+
+
 <% else %>
   <p><%= link_to "Empresa", new_collaborator_session_path %> | 
   <%= link_to "Candidato", new_candidate_session_path %></p>
