@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Collaborator creates company and registers' do
   scenario 'successfully, register first as admin' do
-    visit root_path
+    visit collaborators_path
 
     click_on 'Empresa'
     click_on 'Sign up'
@@ -27,7 +27,7 @@ feature 'Collaborator creates company and registers' do
                                      password:'password', company: company)
 
     login_as non_admin, scope: :collaborator
-    visit root_path
+    visit collaborators_path
 
     expect(page).to have_content 'Empresa: test'
     expect(page).to have_content 'Acesso de Colaborador'

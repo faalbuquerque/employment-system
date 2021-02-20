@@ -7,8 +7,8 @@ feature 'Collaborator edit company data' do
                                  company: company, admin: 1)
 
     login_as admin, scope: :collaborator
-
-    visit root_path
+    visit collaborators_path
+    
     click_on 'Atualizar Empresa'
 
     fill_in 'Nome', with: 'Empresa Teste'
@@ -32,8 +32,8 @@ feature 'Collaborator edit company data' do
                                 company: company, admin: 1)
 
     login_as user, scope: :collaborator
+    visit collaborators_path
 
-    visit root_path
     click_on 'Atualizar Empresa'
 
     fill_in 'Nome', with: ''
@@ -48,7 +48,7 @@ feature 'Collaborator edit company data' do
                                 company: company, admin: 1)
 
     login_as user, scope: :collaborator
-    visit root_path
+    visit collaborators_path
 
     click_on 'Atualizar Empresa'
     click_on 'Adicionar redes sociais'
@@ -68,7 +68,7 @@ feature 'Collaborator edit company data' do
                                 company: company, admin: 1)
 
     login_as user, scope: :collaborator
-    visit root_path
+    visit collaborators_path
 
     click_on 'Atualizar Empresa'
     click_on 'Adicionar redes sociais'

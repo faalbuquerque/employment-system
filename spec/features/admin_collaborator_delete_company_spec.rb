@@ -8,7 +8,7 @@ feature 'Admin collaborator delete company' do
                                  company: company, admin: 1)
 
     login_as admin, scope: :collaborator
-    visit root_path
+    visit collaborators_path
 
     click_on 'Atualizar Empresa'
     click_on 'Apagar Empresa'
@@ -22,7 +22,7 @@ feature 'Admin collaborator delete company' do
                                  company: company, admin: 1)
 
     login_as admin, scope: :collaborator
-    visit root_path
+    visit collaborators_path
     click_on 'Atualizar Empresa'
 
     company.destroy
@@ -44,7 +44,7 @@ feature 'Admin collaborator delete company' do
 
     login_as admin1, scope: :collaborator
 
-    visit root_path
+    visit collaborators_path
     click_on 'Atualizar Empresa'
 
     login_as admin2, scope: :collaborator
@@ -52,7 +52,6 @@ feature 'Admin collaborator delete company' do
     click_on 'Apagar Empresa'
 
     expect(page).to_not have_content 'Dados de company1 apagados com sucesso!'
-    expect(page).to have_content 'Boas vindas test@company2.com'
     expect(Company.all.count).to eq 2
   end
 end

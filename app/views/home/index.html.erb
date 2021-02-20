@@ -1,25 +1,8 @@
-<% if is_admin? %>
 
-  <p>Acesso de Administrador</p>
-  <cite>Boas vindas <%= current_collaborator.email %></cite>
+<h2>Bem vindo</h2>
 
-  <p>
-    Empresa: <%= current_collaborator.company.name %>
-  </p>
-
-  <p>
-    <%= link_to 'Atualizar Empresa', edit_company_path(current_collaborator.company) %>
-  </p>
-
-<% elsif collaborator_signed_in? %>
-
-  <p>Acesso de Colaborador</p>
-
-  <cite>Boas vindas <%= current_collaborator.email %></cite>
-  <p>
-    Empresa: <%= current_collaborator.company.name %>
-  </p>
-
-<% end %>
-
-<hr>
+<p>
+  Ola, esse sistema tem a missao de unir candidatos a empresas
+  como forma de facilitar tanto a parte de quem esta em busca de uma oportunidade,
+  quanto de quem emprega ter maior alcance e mais recursos na hora de buscar um candidato.
+</p>

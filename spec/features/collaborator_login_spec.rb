@@ -7,7 +7,7 @@ feature 'Collaborator login' do
                                  company: company)
 
     login_as admin, scope: :collaborator
-    visit root_path
+    visit collaborators_path
 
     expect(page).to have_content 'Boas vindas test@test.com'
   end
@@ -30,7 +30,7 @@ feature 'Collaborator login' do
     Collaborator.create!(email: 'test@test.com', password: 'password', 
                          company: company)
 
-    visit root_path
+    visit collaborators_path
     click_on 'Empresa'
 
     fill_in 'Email', with: 'test@test.com'

@@ -1,0 +1,25 @@
+<% if is_admin? %>
+
+  <p>Acesso de Administrador</p>
+  <cite>Boas vindas <%= current_collaborator.email %></cite>
+
+  <p>
+    Empresa: <%= current_collaborator.company.name %>
+  </p>
+
+  <p>
+    <%= link_to 'Atualizar Empresa', edit_company_path(current_collaborator.company) %>
+  </p>
+
+<% elsif collaborator_signed_in? %>
+
+  <p>Acesso de Colaborador</p>
+
+  <cite>Boas vindas <%= current_collaborator.email %></cite>
+  <p>
+    Empresa: <%= current_collaborator.company.name %>
+  </p>
+
+<% end %>
+
+<hr>

@@ -5,6 +5,7 @@
   <p>
     <%= current_collaborator.email %> | 
     Empresa: <%= link_to current_collaborator.company.name, company_path(current_collaborator.company) %> | 
+    <%= link_to 'Dashboard', collaborators_path %> | 
     <%= link_to "Logout", destroy_collaborator_session_path, method: :delete %>
   </p>
 
