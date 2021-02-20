@@ -9,7 +9,8 @@
   </p>
 
 <% else %>
-  <p><%= link_to "Empresa", new_collaborator_session_path %></p>
+  <p><%= link_to "Empresa", new_collaborator_session_path %> | 
+  <%= link_to "Candidato", new_candidate_session_path %></p>
 <% end %>
 
 <%= render partial: 'shared/search_form' %>
