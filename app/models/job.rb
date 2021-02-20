@@ -1,6 +1,9 @@
 class Job < ApplicationRecord
   belongs_to :company
 
+  has_many :applications
+  has_many :candidates, through: :applications
+
   enum status: { Disponivel: 1, Indisponivel: 2 }
   enum level: { Júnior: 2, Pleno: 3, Sênior: 4 }
 

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_20_073049) do
+ActiveRecord::Schema.define(version: 2021_02_20_214637) do
+
+  create_table "applications", force: :cascade do |t|
+    t.integer "candidate_id", null: false
+    t.integer "job_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_applications_on_candidate_id"
+    t.index ["job_id"], name: "index_applications_on_job_id"
+  end
 
   create_table "candidates", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -77,6 +86,8 @@ ActiveRecord::Schema.define(version: 2021_02_20_073049) do
     t.index ["company_id"], name: "index_social_networks_on_company_id"
   end
 
+  add_foreign_key "applications", "candidates"
+  add_foreign_key "applications", "jobs"
   add_foreign_key "collaborators", "companies"
   add_foreign_key "jobs", "companies"
   add_foreign_key "social_networks", "companies"
