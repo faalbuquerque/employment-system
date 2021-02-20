@@ -31,7 +31,7 @@ feature 'Collaborator login' do
                          company: company)
 
     visit root_path
-    click_on 'Login'
+    click_on 'Empresa'
 
     fill_in 'Email', with: 'test@test.com'
     fill_in 'Password', with: 'password'

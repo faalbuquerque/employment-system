@@ -4,7 +4,7 @@ feature 'Collaborator creates company and registers' do
   scenario 'successfully, register first as admin' do
     visit root_path
 
-    click_on 'Login'
+    click_on 'Empresa'
     click_on 'Sign up'
 
     fill_in 'Email', with: 'test@test.com'
@@ -42,7 +42,7 @@ feature 'Collaborator creates company and registers' do
 
     visit root_path
 
-    click_on 'Login'
+    click_on 'Empresa'
     click_on 'Sign up'
 
     fill_in 'Email', with: 'test@test.com'
