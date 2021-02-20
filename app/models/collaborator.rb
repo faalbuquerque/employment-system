@@ -5,4 +5,8 @@ class Collaborator < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   belongs_to :company
+
+  def is_admin?
+    !!self.admin.equal?(1)
+  end
 end

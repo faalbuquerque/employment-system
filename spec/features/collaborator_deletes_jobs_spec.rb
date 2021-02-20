@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Collaborator deletes jobs spec' do
 
-  xscenario 'successfully' do
+  scenario 'successfully' do
     company = Company.create!(name: 'tester')
     admin = Collaborator.create!(email: 'test@tester.com', password: 'password', 
                                  company: company)
@@ -16,9 +16,10 @@ feature 'Collaborator deletes jobs spec' do
 
     visit root_path
     click_on admin.company.name
-    #???
+
+    find('a#delete_job_2').click
+
     expect(page).to_not have_content 'Sys Adm'
+    expect(page).to have_content 'Desenvolvedor'
   end
-
-
 end

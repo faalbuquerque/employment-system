@@ -13,20 +13,28 @@
   <%= network.url %></p>
 <% end %>
 
-<p>
-  <%= link_to 'Cadastrar Job', new_job_path %>
-</p>
-<hr>
-<% current_collaborator.company.jobs.each do |job| %>
-  <p>Vaga: <%= link_to job.title_job, job_path(job) %></p>
-  <p>Descrição: <%= job.description %></p>
+<% if collaborator_signed_in? && @company.is_same_company?(current_collaborator) %>
   <p>
-    Salario: 
-    <%= number_to_currency(job.salary_range, precision: 2, separator: ',') %>
+    <%= link_to 'Cadastrar Job', new_job_path %>
   </p>
+<% end %>
+<hr>
+
+<% @company.jobs.each do |job| %>
+
+  <p>Vaga: <%= link_to job.title_job, job_path(job) %></p>
+
+  <p>Descrição: <%= job.description %></p>
+
+  <p>
+    Salario: <%= number_to_currency(job.salary_range, precision: 2, separator: ',') %>
+  </p>
+
   <p>Nivel: <%= job.level %></p>
 
-  <p><%= link_to 'Editar job', edit_job_path(job) %></p>
-  <p><%= link_to 'Apagar', job_path(job), method: :delete %></p>
+  <% if collaborator_signed_in? && @company.is_same_company?(current_collaborator) %>
+    <p><%= link_to 'Editar job', edit_job_path(job) %></p>
+    <p><%= link_to 'Apagar', job_path(job), method: :delete, id: "delete_job_#{job.id}" %></p>
+  <% end %>
   <hr>
 <% end %>

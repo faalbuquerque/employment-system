@@ -1,12 +1,10 @@
-<h1><%= t '.employment_system' %></h1>
-
 <% if is_admin? %>
 
   <p>Acesso de Administrador</p>
   <cite>Boas vindas <%= current_collaborator.email %></cite>
 
   <p>
-    Empresa: <%= link_to current_collaborator.company.name, company_path(current_collaborator.company) %>
+    Empresa: <%= current_collaborator.company.name %>
   </p>
 
   <p>
@@ -19,7 +17,9 @@
 
   <cite>Boas vindas <%= current_collaborator.email %></cite>
   <p>
-    Empresa: <%= link_to current_collaborator.company.name, company_path(current_collaborator.company) %>
+    Empresa: <%= current_collaborator.company.name %>
   </p>
 
 <% end %>
+
+<hr>

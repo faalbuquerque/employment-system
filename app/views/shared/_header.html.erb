@@ -1,8 +1,16 @@
-<p>
-  <% if collaborator_signed_in? %> 
+<h1><%= link_to t('home.index.employment_system'), root_path %></h1>
+
+<% if collaborator_signed_in? %> 
+
+  <p>
+    <%= current_collaborator.email %> | 
+    Empresa: <%= link_to current_collaborator.company.name, company_path(current_collaborator.company) %> | 
     <%= link_to "Logout", destroy_collaborator_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Login", new_collaborator_session_path %>
-  <% end %>
-</p>
+  </p>
+
+<% else %>
+  <p><%= link_to "Login", new_collaborator_session_path %></p>
+<% end %>
+
+<%= render partial: 'shared/search_form' %>
 <hr>

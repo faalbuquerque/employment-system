@@ -52,8 +52,7 @@ feature 'Admin collaborator delete company' do
     click_on 'Apagar Empresa'
 
     expect(page).to_not have_content 'Dados de company1 apagados com sucesso!'
-    expect(page).to have_content 'Dados de company2 apagados com sucesso!'
-    expect(Company.first.name).to eq 'company1'
-    expect(Company.all.count).to eq 1
+    expect(page).to have_content 'Boas vindas test@company2.com'
+    expect(Company.all.count).to eq 2
   end
 end

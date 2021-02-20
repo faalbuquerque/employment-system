@@ -1,4 +1,4 @@
-<%= link_to 'Voltar', @job.company %>
+<%= link_to 'Voltar', root_path %>
 <h2>Detalhes da Vaga</h2>
 
 <p>Nome da vaga: <%= @job.title_job %></p>
@@ -10,4 +10,6 @@
 <p>Quantidade de vagas: <%= @job.quantity %></p>
 <p>Status: <%= @job.status %></p>
 
-<p><%= link_to 'Editar job', edit_job_path(@job) %></p>
+<% if collaborator_signed_in? && @job.company.collaborators.include?(current_collaborator) %>
+  <p><%= link_to 'Editar job', edit_job_path(@job) %></p>
+<% end %>

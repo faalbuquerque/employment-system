@@ -1,5 +1,7 @@
 class JobsController < ApplicationController
-  before_action :authenticate_collaborator!
+  before_action :authenticate_collaborator!, except: %i[show]
+  before_action :fetch_job, only: %i[show edit update destroy]
+  before_action :require_same_company_collaborator, except: %i[new create show]
 
   def new
     @job = current_collaborator.company.jobs.new
@@ -14,22 +16,18 @@ class JobsController < ApplicationController
   end
 
   def show
-    @job = current_collaborator.company.jobs.find(params[:id])
   end
 
   def edit
-    @job = current_collaborator.company.jobs.find(params[:id])
   end
 
   def update
-    @job = current_collaborator.company.jobs.find(params[:id])
     return redirect_to @job if @job.update(job_params)
 
     render :edit
   end
 
   def destroy
-    @job = current_collaborator.company.jobs.find(params[:id])
     return redirect_to current_collaborator.company if @job.delete
   
     render current_collaborator.company.jobs
@@ -49,4 +47,17 @@ class JobsController < ApplicationController
     end
   end
 
+  def fetch_job
+    @job = if collaborator_signed_in? &&
+              current_collaborator.company.jobs.include?(Job.where(id: params[:id]).first)
+              
+              current_collaborator.company.jobs.find(params[:id])
+            else
+              Job.find(params[:id])
+            end
+  end
+
+  def require_same_company_collaborator
+    return redirect_to root_path unless @job.is_same_company_collaborator?(current_collaborator)
+  end 
 end

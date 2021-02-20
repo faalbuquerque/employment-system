@@ -1,0 +1,26 @@
+<%= link_to 'Voltar', root_path %>
+
+<h2>Resultados da busca</h2>
+
+<% @results.each do |result| %>
+
+  <% if result.class.to_s.eql? 'Job' %>
+    <p>
+      Vaga: <%= link_to  result.title_job, result %>
+    </p>
+
+    <p>
+      Nivel: <%= result.level %>
+    </p>
+
+    <p>
+      Vencimento: <%= I18n.localize(result.date_limit) %>
+    </p>
+
+  <% elsif  result.class.to_s.eql? 'Company' %>
+    <p>
+      Empresa: <%= link_to  result.name, result %>
+    </p>
+  <% end %>
+  <hr>
+<% end %>

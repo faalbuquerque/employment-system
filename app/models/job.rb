@@ -10,4 +10,9 @@ class Job < ApplicationRecord
   validates :level, presence: true
   validates :requisite, presence: true
   validates :quantity, presence: true
+
+
+  def is_same_company_collaborator?(collaborator)
+    !!collaborator.company.jobs.include?(self)
+  end
 end

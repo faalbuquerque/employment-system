@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :companies
   resources :social_networks
   resources :jobs
+
+  get 'search', to:"home#search"
 end

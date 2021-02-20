@@ -1,6 +1,8 @@
 class CompaniesController < ApplicationController
-  before_action :authenticate_collaborator!
-  before_action :collaborator_company
+  before_action :authenticate_collaborator!, except: %i[show]
+  before_action :fetch_company
+  before_action :require_same_company, except: %i[show]
+  before_action :require_admin, except: %i[show]
 
   def edit
    @social_networks = @company.social_networks
@@ -29,7 +31,18 @@ class CompaniesController < ApplicationController
     params.require(:company).permit(:name, :logo, :address, :cnpj, :site)
   end
 
-  def collaborator_company
-    @company = current_collaborator.company
+  def fetch_company
+    @company = if collaborator_signed_in? && 
+                  current_collaborator.company == Company.where(id: params[:id]).first
+
+                  current_collaborator.company
+               else
+                  Company.find(params[:id])
+               end
   end
+
+  def require_same_company
+    return redirect_to root_path unless @company.is_same_company?(current_collaborator)
+  end
+  
 end
