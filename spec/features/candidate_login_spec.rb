@@ -2,7 +2,9 @@ require 'rails_helper'
 
 feature 'Candidate Login' do
   scenario 'successfully' do
-    Candidate.create!(email: 'candidate@test.com', password: 'password')
+    Candidate.create!(email: 'candidate@test.com', name: 'Tester', 
+                      cpf: '33333333333', telephone: '11922222222', 
+                      bio: 'Testando as coisas',password: 'password')
 
     visit root_path
     click_on 'Candidato'

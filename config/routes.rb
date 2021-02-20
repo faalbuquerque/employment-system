@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :collaborators, only: %i[index]
 
   devise_for :candidates, path: 'candidates'
+  resources :candidates, only: %i[index]
+
   resources :companies
   resources :social_networks
   resources :jobs

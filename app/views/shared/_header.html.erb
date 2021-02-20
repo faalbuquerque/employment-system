@@ -13,6 +13,7 @@
 
   <p>
     <%= current_candidate.email %> | 
+    <%= link_to 'Dashboard', candidates_path %> | 
     <%= link_to "Logout", destroy_collaborator_session_path, method: :delete %>
   </p>
 
