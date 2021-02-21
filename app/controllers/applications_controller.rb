@@ -7,6 +7,7 @@ class ApplicationsController < ApplicationController
 
   def create
     @job = Job.find(job_params[:id])
+    @job.check_available_applications
     if not(current_candidate.jobs.include?(@job)) && @job.Disponivel?
       message = 'Candidatura efetuada!'
       return redirect_to applications_path, notice: message if current_candidate.jobs << @job

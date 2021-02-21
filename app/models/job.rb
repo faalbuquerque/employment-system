@@ -30,4 +30,16 @@ class Job < ApplicationRecord
   def is_same_company_collaborator?(collaborator)
     !!collaborator.company.jobs.include?(self)
   end
+
+  def check_available_applications
+    accepted = self.applications.where(status: 'aceita').count
+    if accepted >= self.quantity
+      self.update_attribute(:status, 'Indisponivel')
+      message = 'Numero de candidaturas aceitas excedido!'
+    end
+  end
+
+  def check_date_valid
+    self.update_attribute(:status, 'Indisponivel') if self.is_date_in_the_past?
+  end
 end

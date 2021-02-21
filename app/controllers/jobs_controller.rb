@@ -55,14 +55,11 @@ class JobsController < ApplicationController
             else
               Job.find(params[:id])
             end
-    check_date_valid
+    @job.check_date_valid
+    @job.check_available_applications
   end
 
   def require_same_company_collaborator
     return redirect_to root_path unless @job.is_same_company_collaborator?(current_collaborator)
   end 
-
-  def check_date_valid
-    @job.update_attribute(:status, 'Indisponivel') if @job.is_date_in_the_past?
-  end
 end
