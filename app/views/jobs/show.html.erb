@@ -13,3 +13,7 @@
 <% if collaborator_signed_in? && @job.company.collaborators.include?(current_collaborator) %>
   <p><%= link_to 'Editar job', edit_job_path(@job) %></p>
 <% end %>
+
+<p>
+  <%= link_to  'Candidatar', applications_path(job: { id: @job }), method: :post %>
+</p>

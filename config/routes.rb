@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resources :jobs
 
   get 'search', to:"home#search"
+
+  resources :applications
 end

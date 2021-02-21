@@ -1,0 +1,7 @@
+<%= link_to  'Voltar', candidates_path %>
+
+<h2>Candidaturas</h2>
+
+<% @application_jobs.each do |job| %>
+  <p><%= job.title_job %></p>
+<% end %>
