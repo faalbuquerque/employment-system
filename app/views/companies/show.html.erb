@@ -1,6 +1,6 @@
 <%= link_to 'Voltar', collaborators_path%>
 
-<h2>Empresa Atualizada</h2>
+<h2>Empresa</h2>
 
 <p><%= @company.name %></p>
 <p><%= @company.logo %></p>
@@ -21,8 +21,13 @@
 <hr>
 
 <% @company.jobs.each do |job| %>
-
-  <p>Vaga: <%= link_to job.title_job, job_path(job) %></p>
+  <% if collaborator_signed_in? && @company.is_same_company?(current_collaborator) %>
+    <p><b>Vaga: </b><%= job.title_job %>
+    <br>
+    <%= link_to 'Informações de candidaturas', job_path(job) %></p>
+  <% else %>
+    <p>Vaga: <%= link_to job.title_job, job_path(job) %></p>
+  <% end %>
 
   <p>Descrição: <%= job.description %></p>
 

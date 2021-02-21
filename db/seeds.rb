@@ -9,7 +9,7 @@
 company = Company.create!(name: 'test')
 
 collaborador = Collaborator.create!(email: 'collaborador@test.com', 
-                                  password: 'password', company: company, admin: 1)
+                                  password: '123456', company: company, admin: 1)
 
 job = company.jobs.create!(title_job: 'Suporte', description: 'Atender telefone',
                            salary_range: '1500', level: 'Pleno', 
