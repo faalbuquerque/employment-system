@@ -120,7 +120,7 @@ feature 'Collaborator registers jobs' do
 
     click_on 'Criar Job'
 
-    expect(page).to have_content 'Data limite não pode ser no passado!'
+    expect(page).to have_content 'Date limit não pode ser no passado!'
     expect(page).to_not have_content 'Vaga cadastrada com sucesso!'
   end
 end

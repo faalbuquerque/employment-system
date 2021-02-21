@@ -65,4 +65,27 @@ feature 'Collaborator edits jobs' do
     expect(page).to  have_content 'Requisite não pode ficar em branco'
     expect(page).to  have_content 'Quantity não pode ficar em branco'
   end
+
+  scenario 'failure, cant enable job with date in the past' do
+    company = Company.create!(name: 'tester')
+    admin = Collaborator.create!(email: 'test@tester.com', password: 'password', 
+                                 company: company)
+
+     job = Job.create!(title_job: 'Desenvolvedor', 
+                       description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'Disponivel')
+    job.update_attribute(:date_limit, Date.new(1900,01,02))
+
+    login_as admin, scope: :collaborator
+
+    visit root_path
+    click_on admin.company.name
+    click_on 'Editar job'
+
+    select 'Disponivel', from: 'Status'
+
+    click_on 'Atualizar Job'
+
+    expect(page).to  have_content 'Date limit não pode ser no passado!'
+    expect(page).to_not  have_content 'Vaga alterada com sucesso!'
+  end
 end

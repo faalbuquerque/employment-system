@@ -14,6 +14,8 @@
   <p><%= link_to 'Editar job', edit_job_path(@job) %></p>
 <% end %>
 
-<p>
-  <%= link_to  'Candidatar', applications_path(job: { id: @job }), method: :post %>
-</p>
+<% if @job.Disponivel? %>
+  <p>
+    <%= link_to  'Candidatar', applications_path(job: { id: @job }), method: :post %>
+  </p>
+<% end %>

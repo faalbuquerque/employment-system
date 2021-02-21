@@ -22,7 +22,7 @@ class JobsController < ApplicationController
   end
 
   def update
-    return redirect_to @job if @job.update(job_params)
+    return redirect_to @job, notice: 'Vaga alterada com sucesso!' if @job.update(job_params)
 
     render :edit
   end
@@ -55,9 +55,14 @@ class JobsController < ApplicationController
             else
               Job.find(params[:id])
             end
+    check_date_valid
   end
 
   def require_same_company_collaborator
     return redirect_to root_path unless @job.is_same_company_collaborator?(current_collaborator)
   end 
+
+  def check_date_valid
+    @job.update_attribute(:status, 'Indisponivel') if @job.is_date_in_the_past?
+  end
 end

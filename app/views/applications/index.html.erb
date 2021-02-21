@@ -3,5 +3,10 @@
 <h2>Candidaturas</h2>
 
 <% @application_jobs.each do |job| %>
-  <p><%= job.title_job %></p>
+  <p>
+    <%= job.title_job %>
+    <% if job.Indisponivel? %>
+      (Vaga encerrada!)
+    <% end %>
+  </p>
 <% end %>

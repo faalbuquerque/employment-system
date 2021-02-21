@@ -5,6 +5,7 @@ class Job < ApplicationRecord
   has_many :candidates, through: :applications
 
   enum status: { Disponivel: 1, Indisponivel: 2 }
+  
   enum level: { Júnior: 2, Pleno: 3, Sênior: 4 }
 
   validates :title_job, presence: true
@@ -16,9 +17,13 @@ class Job < ApplicationRecord
 
   validate :expiration_date_cannot_be_in_the_past
 
+  def is_date_in_the_past?
+    !!(date_limit.present? && date_limit < Date.today)
+  end
+
   def expiration_date_cannot_be_in_the_past
-    if date_limit.present? && date_limit < Date.today
-      errors.add(:date_limit, 'Data limite não pode ser no passado!')
+    if is_date_in_the_past?
+      errors.add(:date_limit, 'não pode ser no passado!')
     end
   end
 
