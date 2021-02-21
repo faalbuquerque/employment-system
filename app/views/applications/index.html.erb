@@ -3,10 +3,15 @@
 <h2>Candidaturas</h2>
 
 <% @application_jobs.each do |job| %>
+
+  <% application = job.applications.find_by(candidate: current_candidate) %>
+
   <p>
-    <%= job.title_job %>
+    <%= link_to job.title_job, application_path(application) %>
+
     <% if job.Indisponivel? %>
       (Vaga encerrada!)
     <% end %>
   </p>
+
 <% end %>

@@ -16,6 +16,12 @@ class ApplicationsController < ApplicationController
     redirect_to @job, alert: 'Oops, erro na candidatura!'
   end
 
+  def show
+    @application = current_candidate.applications.find(params[:id])
+    @job = @application.job
+
+  end
+
   private
 
   def job_params

@@ -32,7 +32,7 @@ class Job < ApplicationRecord
   end
 
   def check_available_applications
-    accepted = self.applications.where(status: 'aceita').count
+    accepted = self.applications.where(status: 'approved').count
     if accepted >= self.quantity
       self.update_attribute(:status, 'Indisponivel')
       message = 'Numero de candidaturas aceitas excedido!'

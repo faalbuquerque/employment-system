@@ -1,0 +1,12 @@
+<%= link_to  'Voltar', applications_path %>
+
+<h2>Detalhes da Candidatura</h2>
+<hr>
+
+<p> Vaga: <%= @job.title_job %></p>
+<p>Nivel: <%= @job.level %></p>
+<p>Situacao de sua candidatura: <%= t(@application.status) %></p>
+<p>Aceitando candidaturas: <%= @job.status %></p>
+<p>Descricao da vaga: <%= @job.description %></p>
+<p>Requisitos: <%= @job.requisite %></p>
+<p>Salario: <%= number_to_currency(@job.salary_range, precision: 2, separator: ',') %></p>
