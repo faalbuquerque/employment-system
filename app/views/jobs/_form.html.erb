@@ -23,8 +23,12 @@
   <p><%= form.label :requisite, 'Requisitos' %>
   <%= form.text_field :requisite %></p>
 
-  <p><%= form.label :date_limit, 'Data limite' %>
-  <%= form.date_field :date_limit %></p>
+  <p>
+    <%= form.label :date_limit, 'Data limite' %>
+    <%= form.date_field :date_limit %>
+    <br>
+    <cite>(Padrao: 30 dias)</cite>
+  </p>
 
   <p><%= form.label :quantity, 'Quantidade de vagas' %>
   <%= form.number_field :quantity %></p>

@@ -10,7 +10,7 @@ class JobsController < ApplicationController
   def create
     @job = current_collaborator.company.jobs.new(job_params)
     define_date
-    return redirect_to @job if @job.save
+    return redirect_to @job, notice: 'Vaga cadastrada com sucesso!' if @job.save
 
     render :new
   end

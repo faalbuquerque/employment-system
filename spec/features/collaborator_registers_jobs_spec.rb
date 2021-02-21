@@ -61,7 +61,7 @@ feature 'Collaborator registers jobs' do
     expect(page).to  have_content 'Quantity não pode ficar em branco'
   end
 
-  scenario 'deadline test in data' do
+  scenario 'default deadline test in date' do
     last_date = 30.days.from_now
     day = last_date.day
     month = last_date.strftime("%m")
@@ -96,5 +96,31 @@ feature 'Collaborator registers jobs' do
     expect(page).to  have_content  "#{day}/#{month}/#{year}"
     expect(page).to  have_content '33'
     expect(page).to  have_content 'Disponivel'
+  end
+
+  scenario 'failure, date cant be in the past' do
+    company = Company.create!(name: 'tester')
+    admin = Collaborator.create!(email: 'test@tester.com', password: 'password', 
+                                 company: company)
+
+    login_as admin, scope: :collaborator
+    visit root_path
+
+    click_on admin.company.name
+    click_on 'Cadastrar Job'
+
+    fill_in 'Nome', with: 'Nome da Vaga'
+    fill_in 'Descrição', with: 'Detalhes da vaga'
+    fill_in 'Salario', with: '10000'
+    select 'Sênior', from: 'Nivel'
+    fill_in 'Requisitos', with: 'Requisitos necessarios para a vaga'
+    fill_in 'Data limite', with: '01-01-2020'
+    fill_in 'Quantidade de vagas', with: '3'
+    select 'Disponivel', from: 'Status'
+
+    click_on 'Criar Job'
+
+    expect(page).to have_content 'Data limite não pode ser no passado!'
+    expect(page).to_not have_content 'Vaga cadastrada com sucesso!'
   end
 end

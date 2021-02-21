@@ -14,6 +14,13 @@ class Job < ApplicationRecord
   validates :requisite, presence: true
   validates :quantity, presence: true
 
+  validate :expiration_date_cannot_be_in_the_past
+
+  def expiration_date_cannot_be_in_the_past
+    if date_limit.present? && date_limit < Date.today
+      errors.add(:date_limit, 'Data limite não pode ser no passado!')
+    end
+  end
 
   def is_same_company_collaborator?(collaborator)
     !!collaborator.company.jobs.include?(self)
