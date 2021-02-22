@@ -1,5 +1,7 @@
 class ApplicationsController < ApplicationController
-  before_action :authenticate_candidate!
+  before_action :authenticate_candidate!, except: %i[edit update]
+  # before_action :authenticate_collaborator!, only: %i[edit update]
+  before_action :require_collaborator_or_candidate, only: %i[edit update]
 
   def index
     @application_jobs = current_candidate.jobs
@@ -19,12 +21,66 @@ class ApplicationsController < ApplicationController
   def show
     @application = current_candidate.applications.find(params[:id])
     @job = @application.job
+  end
 
+  def edit
+    if collaborator_signed_in?
+      return redirect_to root_path unless is_application_job_collaborator?
+    else
+      return redirect_to root_path unless is_application_job_candidate?
+    end
+  end
+
+  def update
+    if collaborator_signed_in?
+      return redirect_to root_path unless is_application_job_collaborator?
+    else
+      return redirect_to root_path unless is_application_job_candidate?
+    end
+
+    if @application.refuse_msg.nil? && 
+      @application.update(application_params) && 
+      @application.update(status: 'denied')
+
+      message = 'Candidatura cancelada!'
+      return redirect_to @application, notice: message
+    end
+
+    flash.now[:alert] = 'Candidatura ja finalizada!'
+    render :edit
+  end
+
+  def destroy
+    return redirect_to root_path unless is_application_job_collaborator?    
   end
 
   private
 
   def job_params
     params.require(:job).permit(:id)
+  end
+
+  def application_params
+    params.require(:application).permit(:id, :refuse_msg)
+  end
+
+  def is_application_job_collaborator?
+    @application = Application.find(params[:id])
+    @jobs = current_collaborator.company.jobs
+    @job = @application.job
+    @jobs.include?(@job)
+  end
+
+  def is_application_job_candidate?
+    @application = Application.find(params[:id])
+    @jobs = current_candidate.jobs
+    @job = @application.job
+    @jobs.include?(@job)
+  end
+
+  def require_collaborator_or_candidate
+    unless (collaborator_signed_in? || candidate_signed_in?)
+      return redirect_to root_path
+    end
   end
 end

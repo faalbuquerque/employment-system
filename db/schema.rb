@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_042003) do
+ActiveRecord::Schema.define(version: 2021_02_22_011404) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "candidate_id", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_02_21_042003) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 1
+    t.string "refuse_msg"
     t.index ["candidate_id"], name: "index_applications_on_candidate_id"
     t.index ["job_id"], name: "index_applications_on_job_id"
   end

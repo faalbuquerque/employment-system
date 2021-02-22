@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+.denied{
+  color: red;
+}
+.in_progress{
+  color: blue;
+}
+.approved{
+  color: green;
+}

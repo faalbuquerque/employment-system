@@ -7,7 +7,7 @@
   <% application = job.applications.find_by(candidate: current_candidate) %>
 
   <p>
-    <%= link_to job.title_job, application_path(application) %>
+    <%= link_to job.title_job, application_path(application), id: "application_#{application.id}" %>
 
     <% if job.Indisponivel? %>
       (Vaga encerrada!)

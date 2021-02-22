@@ -17,11 +17,26 @@
 <h3>Candidaturas recebidas: <%= @job.applications.count %></h3>
 
   <% @job.applications.each do |application| %>
-    <p>Candidato: <%= application.candidate.name %> | <%= application.candidate.email %></p>
+    <p>
+      Candidato: <%= application.candidate.name %> | 
+      <%= application.candidate.email %> | 
+      <%= t(application.status) %>
+    </p>
+
+    <% unless application.refuse_msg.nil? %>
+      <p>
+        Motivo: <%= application.refuse_msg %>
+      </p>
+    <% end %>
+
+    <% unless application.denied? %>
+      <p><%= link_to 'Cancelar candidatura', edit_application_path(application) %></p>
+    <% end %>
+
   <% end %>
 <% end %>
 
-<% if @job.Disponivel? %>
+<% if @job.Disponivel? && not(collaborator_signed_in?)%>
   <p>
     <%= link_to  'Candidatar', applications_path(job: { id: @job }), method: :post %>
   </p>

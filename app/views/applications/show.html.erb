@@ -5,8 +5,24 @@
 
 <p> Vaga: <%= @job.title_job %></p>
 <p>Nivel: <%= @job.level %></p>
-<p>Situacao de sua candidatura: <%= t(@application.status) %></p>
+
+<p>Situacao de sua candidatura: 
+  <span class='<%= @application.status %>'>
+    <%= t(@application.status) %>
+  </span> 
+</p>
+
+<% if @application.denied? %>
+  <p>Motivo: <%= @application.refuse_msg %></p>
+<% end %>
+
 <p>Aceitando candidaturas: <%= @job.status %></p>
 <p>Descricao da vaga: <%= @job.description %></p>
 <p>Requisitos: <%= @job.requisite %></p>
 <p>Salario: <%= number_to_currency(@job.salary_range, precision: 2, separator: ',') %></p>
+
+<% unless @application.denied? %>
+  <p><%= link_to 'Cancelar candidatura', edit_application_path(@application) %></p>
+<% end %>
+
+
