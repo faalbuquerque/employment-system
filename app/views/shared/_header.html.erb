@@ -1,4 +1,7 @@
-<h1><%= link_to t('home.index.employment_system'), root_path %></h1>
+<%= stylesheet_link_tag "home" %> 
+
+<h2><%= link_to t('home.index.employment_system'), root_path %> 💼 </h2>
+
 
 <% if collaborator_signed_in? %> 
 
@@ -17,11 +20,17 @@
     <%= link_to "Logout", destroy_collaborator_session_path, method: :delete %>
   </p>
 
-
 <% else %>
-  <p><%= link_to "Empresa", new_collaborator_session_path %> | 
-  <%= link_to "Candidato", new_candidate_session_path %></p>
+
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item"> <span class="candidat-collab">🏢</span>
+      <%= link_to "Empresa", new_collaborator_session_path, class: "nav-link" %>
+    </li>
+    <li class="nav-item"><span class="candidat-collab"> 👩‍🔧</span>
+      <%= link_to "Candidato", new_candidate_session_path, class: "nav-link" %>
+    </li>
+  </ul>
+
 <% end %>
 
 <%= render partial: 'shared/search_form' %>
-<hr>

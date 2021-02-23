@@ -1,7 +1,11 @@
-<%= link_to 'Voltar', root_path %>
+<h3>
+  Resultados da busca 
+  <span class='icones'> 🔎 </span>
+</h3>
 
-<h2>Resultados da busca</h2>
+<% return '<h5>Nenhum resultado encontrado!</h5>' if @results.blank? %>
 
+<div class= "result_search">
 <% @results.each do |result| %>
 
   <% if result.class.to_s.eql? 'Job' %>
@@ -24,3 +28,6 @@
   <% end %>
   <hr>
 <% end %>
+</div>
+
+<p class="button" ><%= link_to 'Voltar', root_path %><p>

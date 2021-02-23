@@ -20,7 +20,7 @@ feature 'Collaborator or candidate cancels application' do
     login_as candidate, scope: :candidate
     visit root_path
 
-    fill_in 'Busca:', with: 'rails'
+    fill_in 'Buscar Vagas', with: 'rails'
     click_on 'Pesquisar'
 
     click_on job.title_job
@@ -64,7 +64,7 @@ feature 'Collaborator or candidate cancels application' do
     login_as candidate, scope: :candidate
     visit root_path
 
-    fill_in 'Busca:', with: 'rails'
+    fill_in 'Buscar Vagas', with: 'rails'
     click_on 'Pesquisar'
 
     click_on job.title_job

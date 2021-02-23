@@ -44,5 +44,4 @@ class CompaniesController < ApplicationController
   def require_same_company
     return redirect_to root_path unless @company.is_same_company?(current_collaborator)
   end
-  
 end

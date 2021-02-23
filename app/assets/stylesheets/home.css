@@ -1,0 +1,45 @@
+body {
+  margin: 0.5em;
+}
+
+a:link {
+  text-decoration: none; 
+}
+
+h2 {
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+h5 {
+  text-align: center;
+  color: #007bff;
+}
+
+.margin_b {
+  margin-left: 0.5em;
+}
+
+.text_search, h3 {
+  color: #007bff;
+  padding-right: 0.5em;
+  text-align: center;
+}
+
+.icones {
+  color: blueviolet;
+}
+
+.candidat-collab {
+  font-size: 20px;
+  color: blueviolet;
+}
+
+.result_search {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.button {
+  font-size: 1.2em;
+}

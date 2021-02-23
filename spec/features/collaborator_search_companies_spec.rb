@@ -24,7 +24,7 @@ feature 'Collaborator search companies' do
     login_as admin2, scope: :collaborator
 
     visit root_path
-    fill_in 'Busca:', with: 'Sup'
+    fill_in 'Buscar Vagas', with: 'Sup'
     click_on 'Pesquisar'
 
     expect(current_path).to eq search_path

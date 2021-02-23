@@ -11,7 +11,7 @@ feature 'Visitor apply to job' do
 
     visit root_path
 
-    fill_in 'Busca:', with: 'rails'
+    fill_in 'Buscar Vagas', with: 'rails'
     click_on 'Pesquisar'
 
     click_on job.title_job
