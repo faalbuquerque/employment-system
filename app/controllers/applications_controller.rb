@@ -1,6 +1,5 @@
 class ApplicationsController < ApplicationController
   before_action :authenticate_candidate!, except: %i[edit update]
-  # before_action :authenticate_collaborator!, only: %i[edit update]
   before_action :require_collaborator_or_candidate, only: %i[edit update]
 
   def index
@@ -43,7 +42,9 @@ class ApplicationsController < ApplicationController
       @application.update(status: 'denied')
 
       message = 'Candidatura cancelada!'
-      return redirect_to @application, notice: message
+
+      return redirect_to @application, notice: message if candidate_signed_in?
+      return redirect_to @job, notice: message if collaborator_signed_in?
     end
 
     flash.now[:alert] = 'Candidatura ja finalizada!'
