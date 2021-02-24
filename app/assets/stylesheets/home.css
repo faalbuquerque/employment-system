@@ -1,10 +1,3 @@
-.mt-0 {
-  margin: 0 !important;
-}
-
-body {
-  margin: 0.5em;
-}
 
 a:link {
   text-decoration: none; 
@@ -44,17 +37,23 @@ h5 {
   margin-top: 2em;
   text-align: center;
 }
+p > .button {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
 
-.button  {
-  margin-right: 50%;
-  margin-left: 50%;
-  padding: 1% 2% 1% 2%;
+.button {
+  width: 6em;
+  color: #007bff;
   text-align: center;
   border-radius: 5px;
+  padding: 0.5em 1em;
   background-color:#e3f2fd;
   background-image: linear-gradient(to bottom, rgba(255,255,255,.1), rgba(255,255,255,.3) 49%, rgba(255,255,255,0) 50%, rgba(255,255,255,.3));
   transition: all .5s;
 }
 .button:hover { 
-  background-color:#80dfff;
+  background-color:#007bff;
+  color: white;
 }
