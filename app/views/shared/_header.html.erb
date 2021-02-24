@@ -1,6 +1,8 @@
-<%= stylesheet_link_tag "home" %> 
 
-<h2><%= link_to t('home.index.employment_system'), root_path %> 💼 </h2>
+<h2>
+  <%= link_to t('home.index.employment_system'), root_path %> 
+  <span class= "icones"> 💼 </span>
+</h2>
 
 
 <% if collaborator_signed_in? %> 
