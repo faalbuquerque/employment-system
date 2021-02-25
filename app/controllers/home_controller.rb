@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   private
 
   def fetch_jobs
-    Job.where('title_job like ? OR description like ?', "%#{params[:q]}%", "%#{params[:q]}%").where(status: 'Disponivel')
+    Job.where('title_job like ? OR description like ?', "%#{params[:q]}%", "%#{params[:q]}%").where(status: 'available')
   end
 
   def fetch_companies

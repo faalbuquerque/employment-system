@@ -36,7 +36,7 @@
   <% end %>
 <% end %>
 
-<% if @job.Disponivel? && not(collaborator_signed_in?)%>
+<% if @job.available? && not(collaborator_signed_in?)%>
   <p>
     <%= link_to  'Candidatar', applications_path(job: { id: @job }), method: :post %>
   </p>

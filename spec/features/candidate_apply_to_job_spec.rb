@@ -7,7 +7,7 @@ feature 'Candidate apply to job' do
                                  company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'Disponivel')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester', 
                                   cpf: '33333333333', telephone: '11922222222', 
@@ -32,7 +32,7 @@ feature 'Candidate apply to job' do
                                  company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'Disponivel')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester', 
                                   cpf: '33333333333', telephone: '11922222222', 
@@ -57,13 +57,13 @@ feature 'Candidate apply to job' do
     expect(page).to  have_content 'Candidatar'
   end
 
-  scenario 'failure, job not available' do
+  scenario 'failure, job not Disponivel' do
     company = Company.create!(name: 'tester')
     admin = Collaborator.create!(email: 'test@tester.com', password: 'password',
                                  company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2040-01-01', quantity: '3', company: company, status: 'Disponivel')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2040-01-01', quantity: '3', company: company, status: 'available')
     job.update_attribute(:date_limit, Date.new(1990,01,01))
 
     candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester',
@@ -92,7 +92,7 @@ feature 'Candidate apply to job' do
     job = company.jobs.create!(title_job: 'Suporte', description: 'Atender telefone',
                                salary_range: '1500', level: 'Pleno', 
                                requisite: 'Linux', date_limit: '01-01-2050', 
-                               quantity: '2', status: 'Disponivel')
+                               quantity: '2', status: 'available')
 
     candidateA = Candidate.create!(email: 'candidateA@test.com', name: 'TesterA', 
                                    cpf: '33333333333', telephone: '11922222222', 
@@ -117,7 +117,7 @@ feature 'Candidate apply to job' do
 
     visit job_path(job)
 
-    expect(page).to have_content 'Indisponivel'
+    expect(page).to have_content 'unavailable'
     expect(page).to_not have_content 'Candidatar'
   end
 
@@ -127,7 +127,7 @@ feature 'Candidate apply to job' do
                                  company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'Disponivel')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester', 
                                   cpf: '33333333333', telephone: '11922222222', 
@@ -150,6 +150,6 @@ feature 'Candidate apply to job' do
     click_on job.title_job
 
     expect(page).to  have_content 'Situacao de sua candidatura: Em andamento'
-    expect(page).to  have_content 'Aceitando candidaturas: Disponivel'
+    expect(page).to  have_content 'Aceitando candidaturas: available'
   end
 end

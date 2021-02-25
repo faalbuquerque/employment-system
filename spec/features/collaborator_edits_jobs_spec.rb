@@ -7,7 +7,7 @@ feature 'Collaborator edits jobs' do
                                  company: company)
 
      job = Job.create!(title_job: 'Desenvolvedor', 
-                       description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'Disponivel')
+                       description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     login_as admin, scope: :collaborator
 
@@ -22,7 +22,7 @@ feature 'Collaborator edits jobs' do
     fill_in 'Requisitos', with: 'Requisitos necessarios para a vaga'
     fill_in 'Data limite', with: '01-01-2022'
     fill_in 'Quantidade de vagas', with: '4'
-    select 'Indisponivel', from: 'Status'
+    select 'Unavailable', from: 'Status'
 
     click_on 'Atualizar Job'
 
@@ -33,7 +33,7 @@ feature 'Collaborator edits jobs' do
     expect(page).to  have_content 'Requisitos necessarios para a vaga'
     expect(page).to  have_content '01/01/2022'
     expect(page).to  have_content '4'
-    expect(page).to  have_content 'Indisponivel'
+    expect(page).to  have_content 'Status: unavailable'
   end
 
   scenario 'blank fields' do
@@ -42,7 +42,7 @@ feature 'Collaborator edits jobs' do
                                  company: company)
 
      job = Job.create!(title_job: 'Desenvolvedor', 
-                       description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'Disponivel')
+                       description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     login_as admin, scope: :collaborator
 
@@ -72,7 +72,7 @@ feature 'Collaborator edits jobs' do
                                  company: company)
 
      job = Job.create!(title_job: 'Desenvolvedor', 
-                       description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'Disponivel')
+                       description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
     job.update_attribute(:date_limit, Date.new(1900,01,02))
 
     login_as admin, scope: :collaborator
@@ -81,7 +81,7 @@ feature 'Collaborator edits jobs' do
     click_on admin.company.name
     click_on 'Editar job'
 
-    select 'Disponivel', from: 'Status'
+    select 'available', from: 'Status'
 
     click_on 'Atualizar Job'
 

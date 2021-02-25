@@ -21,7 +21,7 @@ feature 'Collaborator registers jobs' do
     fill_in 'Requisitos', with: 'Requisitos necessarios para a vaga'
     fill_in 'Data limite', with: '01-01-2022'
     fill_in 'Quantidade de vagas', with: '3'
-    select 'Disponivel', from: 'Status'
+    select 'available', from: 'Status'
 
     click_on 'Criar Job'
 
@@ -84,7 +84,7 @@ feature 'Collaborator registers jobs' do
     fill_in 'Requisitos', with: 'Requisitos necessarios para a vaga'
     fill_in 'Data limite', with: ''
     fill_in 'Quantidade de vagas', with: '33'
-    select 'Disponivel', from: 'Status'
+    select 'available', from: 'Status'
 
     click_on 'Criar Job'
 
@@ -95,7 +95,7 @@ feature 'Collaborator registers jobs' do
     expect(page).to  have_content 'Requisitos necessarios para a vaga'
     expect(page).to  have_content  "#{day}/#{month}/#{year}"
     expect(page).to  have_content '33'
-    expect(page).to  have_content 'Disponivel'
+    expect(page).to  have_content 'available'
   end
 
   scenario 'failure, date cant be in the past' do
@@ -116,7 +116,7 @@ feature 'Collaborator registers jobs' do
     fill_in 'Requisitos', with: 'Requisitos necessarios para a vaga'
     fill_in 'Data limite', with: '01-01-2020'
     fill_in 'Quantidade de vagas', with: '3'
-    select 'Disponivel', from: 'Status'
+    select 'available', from: 'Status'
 
     click_on 'Criar Job'
 

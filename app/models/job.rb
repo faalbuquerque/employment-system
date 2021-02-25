@@ -4,7 +4,7 @@ class Job < ApplicationRecord
   has_many :applications
   has_many :candidates, through: :applications
 
-  enum status: { Disponivel: 1, Indisponivel: 2 }
+  enum status: { available: 1, unavailable: 2 }
   
   enum level: { Júnior: 2, Pleno: 3, Sênior: 4 }
 
@@ -34,12 +34,12 @@ class Job < ApplicationRecord
   def check_available_applications
     accepted = self.applications.where(status: 'approved').count
     if accepted >= self.quantity
-      self.update_attribute(:status, 'Indisponivel')
+      self.update_attribute(:status, 'unavailable')
       message = 'Numero de candidaturas aceitas excedido!'
     end
   end
 
   def check_date_valid
-    self.update_attribute(:status, 'Indisponivel') if self.is_date_in_the_past?
+    self.update_attribute(:status, 'unavailable') if self.is_date_in_the_past?
   end
 end

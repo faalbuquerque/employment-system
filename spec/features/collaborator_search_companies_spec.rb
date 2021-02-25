@@ -13,13 +13,13 @@ feature 'Collaborator search companies' do
     job_sup = company2.jobs.create!(title_job: 'Suporte', description: 'Atender telefone',
                                     salary_range: '1500', level: 'Pleno', requisite: 'Linux',
                                     date_limit: '01-01-2050', quantity: '3', 
-                                    status: 'Disponivel')
+                                    status: 'available')
 
     job_dev = company1.jobs.create!(title_job: 'Desenvolvedor', 
                                     description: 'Manutencao de sistemas',
                                     salary_range: '3000', level: 'Júnior', requisite: 'Rails',
                                     date_limit: '10-10-2100', quantity: '2', 
-                                    status: 'Disponivel')
+                                    status: 'available')
 
     login_as admin2, scope: :collaborator
 

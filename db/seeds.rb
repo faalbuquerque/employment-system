@@ -14,7 +14,7 @@ collaborador = Collaborator.create!(email: 'collaborador@test.com',
 job = company.jobs.create!(title_job: 'Suporte', description: 'Atender telefone',
                            salary_range: '1500', level: 'Pleno', 
                            requisite: 'Linux', date_limit: '01-01-2050', 
-                           quantity: '2', status: 'Disponivel')
+                           quantity: '2', status: 'available')
 
 candidateA = Candidate.create!(email: 'candidateA@test.com', name: 'TesterA', 
                                cpf: '33333333333', telephone: '11922222222', 

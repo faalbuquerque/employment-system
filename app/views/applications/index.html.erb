@@ -9,7 +9,7 @@
   <p>
     <%= link_to job.title_job, application_path(application), id: "application_#{application.id}" %>
 
-    <% if job.Indisponivel? %>
+    <% if job.unavailable? %>
       (Vaga encerrada!)
     <% end %>
   </p>
