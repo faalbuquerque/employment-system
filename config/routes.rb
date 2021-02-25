@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   devise_for :candidates, path: 'candidates'
   resources :candidates, only: %i[index]
 
-  resources :companies
-  resources :social_networks
-  resources :jobs
+  resources :companies, only: %i[edit update show destroy]
+  resources :social_networks, except: %i[index]
+  resources :jobs, except: %i[index]
 
   get 'search', to:"home#search"
 
-  resources :applications
+  resources :applications, except: %i[new]
 end
