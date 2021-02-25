@@ -11,13 +11,13 @@ feature 'Collaborator search companies' do
                                  company: company2)
 
     job_sup = company2.jobs.create!(title_job: 'Suporte', description: 'Atender telefone',
-                                    salary_range: '1500', level: 'Pleno', requisite: 'Linux',
+                                    salary_range: '1500', level: 'full', requisite: 'Linux',
                                     date_limit: '01-01-2050', quantity: '3', 
                                     status: 'available')
 
     job_dev = company1.jobs.create!(title_job: 'Desenvolvedor', 
                                     description: 'Manutencao de sistemas',
-                                    salary_range: '3000', level: 'Júnior', requisite: 'Rails',
+                                    salary_range: '3000', level: 'junior', requisite: 'Rails',
                                     date_limit: '10-10-2100', quantity: '2', 
                                     status: 'available')
 
@@ -29,7 +29,7 @@ feature 'Collaborator search companies' do
 
     expect(current_path).to eq search_path
     expect(page).to have_content('Suporte')
-    expect(page).to have_content('Pleno')
+    expect(page).to have_content('full')
     expect(page).to have_content('01/01/2050')
   end
 end

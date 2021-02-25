@@ -7,7 +7,7 @@ feature 'Visitor apply to job' do
                                  company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'senior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     visit root_path
 

@@ -6,7 +6,7 @@ class Job < ApplicationRecord
 
   enum status: { available: 1, unavailable: 2 }
   
-  enum level: { Júnior: 2, Pleno: 3, Sênior: 4 }
+  enum level: { junior: 2, full: 3, senior: 4 }
 
   validates :title_job, presence: true
   validates :description, presence: true

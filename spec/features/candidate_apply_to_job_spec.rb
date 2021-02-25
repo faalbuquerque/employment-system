@@ -7,7 +7,7 @@ feature 'Candidate apply to job' do
                                  company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'senior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester', 
                                   cpf: '33333333333', telephone: '11922222222', 
@@ -32,7 +32,7 @@ feature 'Candidate apply to job' do
                                  company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'senior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester', 
                                   cpf: '33333333333', telephone: '11922222222', 
@@ -63,7 +63,7 @@ feature 'Candidate apply to job' do
                                  company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2040-01-01', quantity: '3', company: company, status: 'available')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'senior', requisite: 'Experiencia com Git', date_limit: '2040-01-01', quantity: '3', company: company, status: 'available')
     job.update_attribute(:date_limit, Date.new(1990,01,01))
 
     candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester',
@@ -90,7 +90,7 @@ feature 'Candidate apply to job' do
                                         admin: 1)
 
     job = company.jobs.create!(title_job: 'Suporte', description: 'Atender telefone',
-                               salary_range: '1500', level: 'Pleno', 
+                               salary_range: '1500', level: 'full', 
                                requisite: 'Linux', date_limit: '01-01-2050', 
                                quantity: '2', status: 'available')
 
@@ -127,7 +127,7 @@ feature 'Candidate apply to job' do
                                  company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'senior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester', 
                                   cpf: '33333333333', telephone: '11922222222', 

@@ -7,7 +7,7 @@ feature 'Collaborator view applications' do
                                         password: 'password', company: company)
 
     job = Job.create!(title_job: 'Desenvolvedor', 
-                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'Sênior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
+                      description: 'Desenvolvedor rails', salary_range: '3000', level: 'senior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
 
     candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester', 
                                   cpf: '33333333333', telephone: '11922222222', 
