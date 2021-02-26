@@ -28,7 +28,7 @@ class JobsController < ApplicationController
   end
 
   def destroy
-    return redirect_to current_collaborator.company if @job.delete
+    return redirect_to current_collaborator.company if @job.destroy
   
     render current_collaborator.company.jobs
   end
@@ -50,7 +50,7 @@ class JobsController < ApplicationController
   def fetch_job
     @job = if collaborator_signed_in? &&
               current_collaborator.company.jobs.include?(Job.where(id: params[:id]).first)
-              
+
               current_collaborator.company.jobs.find(params[:id])
             else
               Job.find(params[:id])

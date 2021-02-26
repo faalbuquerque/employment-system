@@ -1,11 +1,9 @@
 class Job < ApplicationRecord
   belongs_to :company
-
-  has_many :applications
-  has_many :candidates, through: :applications
+  has_many :applications, dependent: :destroy
+  has_many :candidates, through: :applications, dependent: :destroy
 
   enum status: { available: 1, unavailable: 2 }
-  
   enum level: { junior: 2, full: 3, senior: 4 }
 
   validates :title_job, presence: true

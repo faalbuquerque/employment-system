@@ -12,7 +12,7 @@ collaborador = Collaborator.create!(email: 'collaborador@test.com',
                                   password: '123456', company: company, admin: 1)
 
 job = company.jobs.create!(title_job: 'Suporte', description: 'Atender telefone',
-                           salary_range: '1500', level: 'Pleno', 
+                           salary_range: '1500', level: 'senior', 
                            requisite: 'Linux', date_limit: '01-01-2050', 
                            quantity: '2', status: 'available')
 
