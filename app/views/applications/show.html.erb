@@ -9,11 +9,16 @@
 <p>Situacao de sua candidatura: 
   <span class='<%= @application.status %>'>
     <%= t(@application.status) %>
-  </span> 
+  </span>
 </p>
 
 <% if @application.denied? %>
-  <p>Motivo: <%= @application.refuse_msg %></p>
+  <p>
+    Motivo: 
+    <span class='<%= @application.status %>'>
+      <%= @application.refuse_msg %>
+    </span>
+  </p>
 <% end %>
 
 <p>Aceitando candidaturas: <%= @job.status %></p>

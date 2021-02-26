@@ -1,0 +1,9 @@
+.denied{
+  color: red !important;
+}
+.in_progress{
+  color: blue !important;
+}
+.approved{
+  color: green !important;
+}
