@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
-
   def index
-    @jobs = Job.all
   end
 
   def search
@@ -11,7 +9,8 @@ class HomeController < ApplicationController
   private
 
   def fetch_jobs
-    Job.where('title_job like ? OR description like ?', "%#{params[:q]}%", "%#{params[:q]}%").where(status: 'available')
+    Job.where('title_job like ? OR description like ?', "%#{params[:q]}%", "%#{params[:q]}%")
+       .where(status: 'available')
   end
 
   def fetch_companies
