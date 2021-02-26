@@ -13,4 +13,12 @@ class Company < ApplicationRecord
     !!collaborator.is_admin? && self.collaborators.include?(collaborator)
   end
 
+  def self.wich_is_for_who(signed_in, collaborator, id)
+    if signed_in && collaborator.company == Company.where(id: id).first
+
+      collaborator.company
+   else
+      Company.find(id)
+   end
+  end
 end

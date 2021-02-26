@@ -9,7 +9,7 @@ class JobsController < ApplicationController
 
   def create
     @job = current_collaborator.company.jobs.new(job_params)
-    define_date
+    @job.define_date(job_params[:date_limit])
     return redirect_to @job, notice: 'Vaga cadastrada com sucesso!' if @job.save
 
     render :new
@@ -22,14 +22,16 @@ class JobsController < ApplicationController
   end
 
   def update
-    return redirect_to @job, notice: 'Vaga alterada com sucesso!' if @job.update(job_params)
+    @job.define_date(job_params[:date_limit])
+
+    return redirect_to @job, notice: 'Vaga alterada com sucesso!' if @job.update(job_params.merge(date_limit: @job.date_limit))
 
     render :edit
   end
 
   def destroy
     return redirect_to current_collaborator.company if @job.destroy
-  
+
     render current_collaborator.company.jobs
   end
 
@@ -39,27 +41,12 @@ class JobsController < ApplicationController
     params.require(:job).permit(:title_job, :description, :salary_range, :level, :requisite, :date_limit, :quantity, :status)
   end
 
-  def define_date
-    @job.date_limit = if job_params[:date_limit].blank?
-      30.days.from_now
-    else
-      job_params[:date_limit]
-    end
-  end
-
   def fetch_job
-    @job = if collaborator_signed_in? &&
-              current_collaborator.company.jobs.include?(Job.where(id: params[:id]).first)
-
-              current_collaborator.company.jobs.find(params[:id])
-            else
-              Job.find(params[:id])
-            end
-    @job.check_date_valid
-    @job.check_available_applications
+    @job = Job.wich_is_for_who(collaborator_signed_in?, current_collaborator,
+                               params[:id])
   end
 
   def require_same_company_collaborator
     return redirect_to root_path unless @job.is_same_company_collaborator?(current_collaborator)
-  end 
+  end
 end

@@ -52,7 +52,7 @@ class ApplicationsController < ApplicationController
   end
 
   def destroy
-    return redirect_to root_path unless is_application_job_collaborator?    
+    return redirect_to root_path unless is_application_job_collaborator?
   end
 
   private

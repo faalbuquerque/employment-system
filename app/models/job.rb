@@ -12,7 +12,6 @@ class Job < ApplicationRecord
   validates :level, presence: true
   validates :requisite, presence: true
   validates :quantity, presence: true
-
   validate :expiration_date_cannot_be_in_the_past
 
   def is_date_in_the_past?
@@ -39,5 +38,24 @@ class Job < ApplicationRecord
 
   def check_date_valid
     self.update_attribute(:status, 'unavailable') if self.is_date_in_the_past?
+  end
+
+  def define_date(job_date_limit)
+    self.date_limit = if job_date_limit.blank?
+      30.days.from_now
+    else
+      job_date_limit
+    end
+  end
+
+  def self.wich_is_for_who(signed_in, collaborator, id)
+    if signed_in && collaborator.company.jobs.include?(Job.where(id: id).first)
+      job = collaborator.company.jobs.find(id)
+    else
+      job = Job.find(id)
+    end
+    job.check_date_valid
+    job.check_available_applications
+    job
   end
 end

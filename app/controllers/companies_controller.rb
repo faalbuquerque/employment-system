@@ -32,13 +32,8 @@ class CompaniesController < ApplicationController
   end
 
   def fetch_company
-    @company = if collaborator_signed_in? && 
-                  current_collaborator.company == Company.where(id: params[:id]).first
-
-                  current_collaborator.company
-               else
-                  Company.find(params[:id])
-               end
+    @company = Company.wich_is_for_who(collaborator_signed_in?, current_collaborator,
+                                       params[:id])
   end
 
   def require_same_company
