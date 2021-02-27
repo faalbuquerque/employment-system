@@ -4,22 +4,6 @@ class Collaborators::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  before_action :create_company, only: %i[create]
-
-  def create_company
-    email = params[:collaborator][:email]
-    company_name = email.blank? ? '' : email.split('@').last.split('.').first 
-
-    unless Company.exists?(name: company_name) 
-      @company = Company.create!(name: company_name)
-
-      params[:collaborator][:company_id] = @company.id
-      params[:collaborator][:admin] = 1
-    else
-      params[:collaborator][:company_id] = Company.find_by(name: company_name).id
-    end
-  end
-
   # GET /resource/sign_up
   # def new
   #   super
