@@ -7,3 +7,15 @@
 .approved{
   color: green !important;
 }
+.notice_container{
+  margin: 0.5em 0;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.custom_notice_msg{
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

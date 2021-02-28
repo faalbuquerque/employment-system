@@ -23,10 +23,7 @@
 
   <body>
     <%= render partial: "shared/header" %>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert denied"><%= alert %></p>
-
+    <%= render partial: "shared/notice_alert" %>
     <%= yield %>
   </body>
 </html>
