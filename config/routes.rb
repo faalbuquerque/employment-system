@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   get 'search', to:"home#search"
 
   resources :applications, except: %i[new]
+
+  resources :proposals, only: %i[new create]
 end

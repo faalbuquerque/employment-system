@@ -1,0 +1,23 @@
+<% @proposal.errors.any? do %>
+  <% @proposal.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %> 
+
+<%= form_with model: @proposal, local: true do |form| %>
+
+  <p><%= form.label :message, 'Mensagem' %>
+  <%= form.text_field :message %></p>
+
+  <p><%= form.label :wage, 'Salario' %>
+  <%= form.text_field :wage %></p>
+
+  <p>
+    <%= form.label :date_init, 'Data de inicio' %>
+    <%= form.date_field :date_init, value: @application.job.date_limit  %>
+  </p>
+
+  <%= form.hidden_field :id, value: @application.id %>
+
+  <p><%= form.submit %></p>
+<% end %>

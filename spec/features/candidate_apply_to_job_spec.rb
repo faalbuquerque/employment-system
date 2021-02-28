@@ -133,8 +133,6 @@ feature 'Candidate apply to job' do
                                   cpf: '33333333333', telephone: '11922222222', 
                                   bio: 'Testando as coisas',password: 'password')
 
-    
-
     login_as candidate, scope: :candidate
     visit root_path
 
