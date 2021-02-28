@@ -11,7 +11,7 @@ class CollaboratorsController < Devise::RegistrationsController
     company_name = email.blank? ? '' : email.split('@').last.split('.').first 
 
     unless Company.exists?(name: company_name) 
-      @company = Company.create!(name: company_name)
+      @company = Company.create(name: company_name)
 
       params[:collaborator][:company_id] = @company.id
       params[:collaborator][:admin] = 1

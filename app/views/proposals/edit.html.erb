@@ -1,0 +1,25 @@
+<% @proposal.errors.any? do %>
+  <% @proposal.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %> 
+
+<%= form_with model: @proposal, local: true do |form| %>
+
+  <p>
+    <%= form.label :message, 'Mensagem' %>
+    <%= form.text_area :message %>
+  </p>
+
+  <p>
+    <%= form.label :date_init, 'Data de inicio' %>
+    <%= form.date_field :date_init, value: @application.job.date_limit  %>
+  </p>
+
+  <p>
+    <%= form.label :status, 'Resposta' %>
+    <%= form.select :status, Proposal.statuses.reject {|status| status == 'pendent'}.map { |key, value| [key.humanize, key] } , { include_blank: 'Escolha'}, { multiple: false } %>
+  </p>
+
+  <p><%= form.submit %></p>
+<% end %>

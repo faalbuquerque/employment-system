@@ -29,3 +29,16 @@
 <% unless @application.denied? %>
   <p><%= link_to 'Cancelar candidatura', edit_application_path(@application) %></p>
 <% end %>
+
+
+<% if @application.proposals.any? %>
+  <hr>
+  <h4>Proposta</h4>
+  <% proposal = @application.proposals.last  %>
+    <p>Status: <%= proposal.status %></p>
+    <p>Mensagem: <%= proposal.message %></p>
+    <p>Salario: <%= number_to_currency(proposal.wage, precision: 2, separator: ',') %></p>
+    <p>Data de inicio: <%= I18n.localize(proposal.date_init) %></p>
+
+    <p><%= link_to 'Responder proposta', edit_proposal_path(proposal) %></p>
+<% end %>

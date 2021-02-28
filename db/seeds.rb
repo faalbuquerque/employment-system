@@ -27,3 +27,8 @@ candidateB = Candidate.create!(email: 'candidateB@test.com', name: 'TesterB',
 candidateC = Candidate.create!(email: 'candidateC@test.com', name: 'TesterC', 
                                cpf: '33333333333', telephone: '11922222222', 
                                bio: 'Testando as coisas',password: '123456')
+
+application = candidateC.applications.create!(job: job)
+
+proposal = application.proposals.create!(message: 'Essa é nossa proposta',
+                                         wage:4000, date_init:'01-01-2060')

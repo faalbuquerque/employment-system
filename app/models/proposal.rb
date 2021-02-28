@@ -4,6 +4,7 @@ class Proposal < ApplicationRecord
   validates :message, presence: true
   validates :wage, presence: true
   validates :date_init, presence: true
+  validates :status, presence: true
 
   validate :date_init_cannot_be_in_the_past
 
@@ -22,5 +23,13 @@ class Proposal < ApplicationRecord
   def self.can_add_proposal?(application)
     proposals = Application.find(application.id).proposals
     !!(proposals.empty? || proposals.last.rejected?)
+  end
+
+  def  self.wich_is_for_who(collaborator, candidate, tmp_params)
+    if collaborator
+      Application.find(tmp_params[:proposal][:id])
+     elsif candidate
+      Proposal.find(tmp_params[:id]).application
+     end
   end
 end

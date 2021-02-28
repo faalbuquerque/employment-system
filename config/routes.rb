@@ -17,5 +17,5 @@ Rails.application.routes.draw do
 
   resources :applications, except: %i[new]
 
-  resources :proposals, only: %i[new create]
+  resources :proposals, only: %i[new create edit update]
 end

@@ -33,7 +33,9 @@
       <p>
         <%= link_to 'Enviar proposta', new_proposal_path(proposal: { id: application }) %>
       </p>
-    <%else %>
+    <% end %>
+
+    <% if application.proposals.any? %>
       <h4>Proposta</h4>
       <% proposal = application.proposals.last  %>
         <p>Status: <%= proposal.status %></p>
@@ -41,7 +43,6 @@
         <p>Salario: <%= number_to_currency(proposal.wage, precision: 2, separator: ',') %></p>
         <p>Data de inicio: <%= I18n.localize(proposal.date_init) %></p>
     <% end %>
-
 
     <% unless application.denied? %>
       <p><%= link_to 'Cancelar candidatura', edit_application_path(application) %></p>
