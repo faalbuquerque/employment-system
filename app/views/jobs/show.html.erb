@@ -35,9 +35,9 @@
       <% end %>
 
       <% if Proposal.can_add_proposal?(application) %>
-        <p>
-          <%= link_to 'Enviar proposta', new_proposal_path(proposal: { id: application }) %>
-        </p>
+        <br>
+        <%= link_to 'Enviar proposta', new_proposal_path(proposal: { id: application }), class: "btn btn-primary" %>
+       <br>
       <% end %>
 
       <% if application.proposals.any? %>
