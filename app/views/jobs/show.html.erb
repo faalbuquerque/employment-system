@@ -4,7 +4,7 @@
   <p>Nome da vaga: <%= @job.title_job %></p>
   <p>Descrição: <%= @job.description %></p>
   <p>Salario: <%= number_to_currency(@job.salary_range, precision: 2, separator: ',') %></p>
-  <p>Nive: <%= @job.level %></p>
+  <p>Nivel: <%= @job.level %></p>
   <p>Requisitos: <%= @job.requisite %></p>
   <p>Data Limite: <%= I18n.localize(@job.date_limit) %></p>
   <p>Quantidade de vagas: <%= @job.quantity %></p>
