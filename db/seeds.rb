@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-company = Company.create!(name: 'test')
+company = Company.create!(name: 'My company')
 
 collaborador = Collaborator.create!(email: 'collaborador@test.com', 
                                   password: '123456', company: company, admin: 1)
