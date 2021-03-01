@@ -106,5 +106,22 @@ Proposta
   Mensagem: Essa é nossa proposta
 
 ```
+<hr>
+<h2 align="center"> Trello: </h2>
 
+<p align="center">
+  <a  href="https://trello.com/b/oLBbFXkQ/employment-system"  >
+    Link para o quadro
+  </a>
+<p>
+<br>
+
+<hr>
+<h2 align="center"> Preview: </h2>
+<br>
+<div align="center">
+
+  ![gif_do_projeto](git_images/gifs/screen.gif)
+
+<div>
 
