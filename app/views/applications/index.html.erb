@@ -1,17 +1,21 @@
-<%= link_to  'Voltar', candidates_path %>
+<%= link_to  'Voltar', candidates_path, class:"button btn btn-sm" %>
 
-<h2>Candidaturas</h2>
+<div class="div_center">
 
-<% @application_jobs.each do |job| %>
+  <h2>Candidaturas</h2>
 
-  <% application = job.applications.find_by(candidate: current_candidate) %>
+  <% @application_jobs.each do |job| %>
 
-  <p>
-    <%= link_to job.title_job, application_path(application), id: "application_#{application.id}" %>
+    <% application = job.applications.find_by(candidate: current_candidate) %>
 
-    <% if job.unavailable? %>
-      (Vaga encerrada!)
-    <% end %>
-  </p>
+    <p>
+      <%= link_to job.title_job, application_path(application), id: "application_#{application.id}", class:"btn btn-light" %>
 
-<% end %>
+      <% if job.unavailable? %>
+        (Vaga encerrada!)
+      <% end %>
+    </p>
+
+  <% end %>
+
+</div>

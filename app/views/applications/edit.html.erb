@@ -1,10 +1,12 @@
+<%= link_to 'Voltar', @application.job, class:"button btn btn-sm" %>
+
 <h2>Mensagem de Cancelamento</h2>
 
-<%= form_with model: @application, local: true do |f| %>
+<%= form_with model: @application, local: true, class: 'div_center' do |f| %>
 
   <%= f.hidden_field :id, value: @application.id  %>
   <p><%= f.label :refuse_msg, 'Mensagem:' %></p>
   <p><%= f.text_area :refuse_msg %></p>
 
-  <p><%= f.submit 'Enviar mensagem' %></p>
+  <%= f.submit 'Enviar mensagem', class: "btn btn-warning" %>
 <% end %>

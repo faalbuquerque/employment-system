@@ -1,17 +1,20 @@
+<%= link_to 'Voltar', root_path, class:"button btn btn-sm"%>
+
+<div class="div_center">
 <% if is_admin? %>
-  <p>Acesso de Administrador</p>
-  
+  <h5>Acesso de Administrador</h5>
+  <br>
   <cite>Boas vindas <%= current_collaborator.email %></cite>
   <p>
     Empresa: <%= current_collaborator.company.name %>
   </p>
-
+  <br>
   <p>
-    <%= link_to 'Atualizar Empresa', edit_company_path(current_collaborator.company) %>
+    <%= link_to 'Atualizar Empresa', edit_company_path(current_collaborator.company), class: "btn btn-light" %>
   </p>
 
   <p>
-    <%= link_to 'Candidaturas', company_path(current_collaborator.company) %>
+    <%= link_to 'Candidaturas', company_path(current_collaborator.company), class: "btn btn-light" %>
   </p>
 
 <% elsif collaborator_signed_in? %>
@@ -28,4 +31,5 @@
   </p>
 
 <% end %>
+</div>
 <hr>

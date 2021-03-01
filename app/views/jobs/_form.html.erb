@@ -4,39 +4,53 @@
   <% end %>
 <% end %> 
 
-<%= form_with model: @job, local: true do |form| %>
+<div class="form-group">
+  <%= form_with model: @job, local: true do |form| %>
 
-  <p><%= form.label :title_job, 'Nome' %>
-  <%= form.text_field :title_job %></p>
+    <div class="field form-group">
+      <%= form.label :title_job, 'Nome' %>
+      <%= form.text_field :title_job, class: "form-control" %>
+    </div>
 
-  <p><%= form.label :description, 'Descrição' %>
-  <%= form.text_field :description %></p>
+    <div class="field form-group">
+      <%= form.label :description, 'Descrição' %>
+      <%= form.text_field :description, class: "form-control" %>
+    </div>
 
-  <p><%= form.label :salary_range, 'Salario' %>
-  <%= form.number_field :salary_range %></p>
+    <div class="field form-group">
+      <%= form.label :salary_range, 'Salario' %>
+      <%= form.number_field :salary_range, class: "form-control" %>
+    </div>
 
-  <p>
-    <%= form.label :level, 'Nivel' %>
-    <%= form.select :level, Job.levels.map { |key, value| [key.humanize, key] } %>
-  </p>
+    <div class="field form-group">
+      <%= form.label :level, 'Nivel' %>
+      <%= form.select :level, Job.levels.map { |key, value| [key.humanize, key] }, class: "form-control" %>
+    </div>
 
-  <p><%= form.label :requisite, 'Requisitos' %>
-  <%= form.text_field :requisite %></p>
+    <div class="field form-group">
+      <%= form.label :requisite, 'Requisitos' %>
+      <%= form.text_field :requisite, class: "form-control" %>
+    </div>
 
-  <p>
-    <%= form.label :date_limit, 'Data limite' %>
-    <%= form.date_field :date_limit %>
-    <br>
-    <cite>(Padrao: 30 dias)</cite>
-  </p>
+    <div class="field form-group">
+      <%= form.label :date_limit, 'Data limite' %>
+      <%= form.date_field :date_limit, class: "form-control" %>
 
-  <p><%= form.label :quantity, 'Quantidade de vagas' %>
-  <%= form.number_field :quantity %></p>
+      <cite>(Padrao: 30 dias)</cite>
+    </div>
 
-  <p>
-    <%= form.label :status, 'Status' %>
-    <%= form.select :status, Job.statuses.map { |key, value| [key.humanize, key] } %>
-  </p>
+    <div class="field form-group">
+      <%= form.label :quantity, 'Quantidade de vagas' %>
+      <%= form.number_field :quantity, class: "form-control" %>
+    </div>
 
-  <p><%= form.submit %></p>
-<% end %>
+    <div class="field form-group">
+      <%= form.label :status, 'Status' %>
+      <%= form.select :status, Job.statuses.map { |key, value| [key.humanize, key] }, class: "form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

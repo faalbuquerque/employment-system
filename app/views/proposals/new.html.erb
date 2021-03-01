@@ -1,23 +1,35 @@
-<% @proposal.errors.any? do %>
-  <% @proposal.errors.full_messages.each do |message| %>
-    <p><%= message %></p>
+<%= link_to 'Voltar', @application.job, class:"button btn btn-sm" %>
+
+<p>
+  <% @proposal.errors.any? do %>
+    <% @proposal.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  <% end %> 
+</p>
+
+<div class="form-group">
+  <%= form_with model: @proposal, local: true do |form| %>
+
+    <div class="field form-group">
+      <%= form.label :message, 'Mensagem' %>
+      <%= form.text_field :message, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :wage, 'Salario' %>
+      <%= form.text_field :wage, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :date_init, 'Data de inicio' %>
+      <%= form.date_field :date_init, value: @application.job.date_limit, class: "form-control"  %>
+    </div>
+
+    <%= form.hidden_field :id, value: @application.id %>
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
   <% end %>
-<% end %> 
-
-<%= form_with model: @proposal, local: true do |form| %>
-
-  <p><%= form.label :message, 'Mensagem' %>
-  <%= form.text_field :message %></p>
-
-  <p><%= form.label :wage, 'Salario' %>
-  <%= form.text_field :wage %></p>
-
-  <p>
-    <%= form.label :date_init, 'Data de inicio' %>
-    <%= form.date_field :date_init, value: @application.job.date_limit  %>
-  </p>
-
-  <%= form.hidden_field :id, value: @application.id %>
-
-  <p><%= form.submit %></p>
-<% end %>
+</div>

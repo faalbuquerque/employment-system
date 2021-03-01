@@ -1,9 +1,9 @@
 <%= stylesheet_link_tag "home" %> 
 
-  <nav class="navbar navbar-light row d-flex justify-content-center" style="background-color: #e3f2fd;">
-      <%= form_with url: search_path, method: :get, class: "form-inline my-2 my-lg-2" do %>
+  <nav class="navbar navbar-light row d-flex justify-content-center nav_bar_custom" style="background-color: #e3f2fd;">
+      <%= form_with url: search_path, method: :get, class: "form-inline my-2 my-lg-2 custom_form_search" do %>
         <%= label_tag :q, 'Buscar Vagas', class: "text_search" %>
         <%= text_field_tag :q %>
-        <%= submit_tag 'Pesquisar', class: "btn badge-primary margin_b my-2 my-sm-0" %>
+        <%= submit_tag 'Pesquisar', class: "btn badge-primary margin_b my-2 my-sm-0 btn_custom" %>
       <% end %>
   </nav>

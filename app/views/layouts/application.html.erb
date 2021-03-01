@@ -17,13 +17,16 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application_custom', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
+
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= render partial: "shared/header" %>
-    <%= render partial: "shared/notice_alert" %>
-    <%= yield %>
+
+    <div class="container"> 
+      <%= render partial: "shared/notice_alert" %>
+      <%= yield %>
+    </div>
   </body>
 </html>

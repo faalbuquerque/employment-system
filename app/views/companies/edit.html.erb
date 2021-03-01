@@ -1,4 +1,4 @@
-<%= link_to 'Voltar', collaborators_path%>
+<%= link_to 'Voltar', collaborators_path, class:"button btn btn-sm" %>
 
 <% @company.errors.any? do %>
   <% @company.errors.full_messages.each do |message| %>
@@ -6,29 +6,44 @@
   <% end %>
 <% end %>
 
-<h1>Atualizar Empresa</h1>
+<h2>Atualizar Empresa</h2>
 
-<%= form_with model: @company, local: true do |form| %>
+<div class="form-group">
+  <%= form_with model: @company, local: true do |form| %>
 
-  <p><%= form.label :name, 'Nome' %>
-  <%= form.text_field :name %></p>
+    <div class="field form-group">
+      <%= form.label :name, 'Nome' %>
+      <%= form.text_field :name, class: "form-control" %>
+    </p>
 
-  <p><%= form.label :logo, 'Upload de imagem' %>
-  <%= form.text_field :logo %></p>
+    <div class="field form-group">
+      <%= form.label :logo, 'Upload de imagem' %>
+      <%= form.text_field :logo , class: "form-control"%>
+    </div>
 
-  <p><%= form.label :address, 'Endereço' %>
-  <%= form.text_field :address %></p>
+    <div class="field form-group">
+      <%= form.label :address, 'Endereço' %>
+      <%= form.text_field :address, class: "form-control" %>
+    </div>
 
-  <p><%= form.label :cnpj, 'CNPJ' %>
-  <%= form.text_field :cnpj %></p>
+    <div class="field form-group">
+      <%= form.label :cnpj, 'CNPJ' %>
+      <%= form.text_field :cnpj, class: "form-control" %>
+    </div>
 
-  <p><%= form.label :site, 'Site' %>
-  <%= form.url_field :site %></p>
+    <div class="field form-group">
+      <%= form.label :site, 'Site' %>
+      <%= form.url_field :site, class: "form-control" %>
+    </div>
 
-  <p><%= form.submit %></p>
-<% end %>
+    <div class="actions">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<div>
+<br>
 
-<%= link_to 'Adicionar redes sociais', new_social_network_path %>
+<%= link_to 'Adicionar redes sociais', new_social_network_path, class: "btn btn-light" %>
 
 <% @social_networks.each do |social_network| %>
   <p>
@@ -39,7 +54,7 @@
   </p>
 <% end %>
 
-<p>
+<div class="div_center">
   <% alert_prompt = 'Tanto empresa quanto colaboradores serão apagados, tem certeza que quer continuar?' %>
-  <%= link_to 'Apagar Empresa', company_path(current_collaborator.company), data: { confirm: alert_prompt }, method: :delete %>
-</p>
+  <%= link_to 'Apagar Empresa', company_path(current_collaborator.company), data: { confirm: alert_prompt }, method: :delete, class: "btn btn-danger btn-apaga-empresa" %>
+</div>

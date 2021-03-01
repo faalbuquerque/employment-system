@@ -1,8 +1,7 @@
-<%= link_to 'Voltar', collaborators_path%>
+<%= link_to 'Voltar', collaborators_path, class:"button btn btn-sm"%>
 
-<h2>Empresa</h2>
+<h3>Empresa <%= @company.name %></h3>
 
-<p><%= @company.name %></p>
 <p><%= @company.logo %></p>
 <p><%= @company.address %></p>
 <p><%= @company.cnpj %></p>
@@ -14,32 +13,43 @@
 <% end %>
 
 <% if collaborator_signed_in? && @company.is_same_company?(current_collaborator) %>
-  <p>
-    <%= link_to 'Cadastrar Job', new_job_path %>
-  </p>
+<div class="div_center">
+    <%= link_to 'Cadastrar Job', new_job_path, class: "btn btn-light btn-cadastra-job" %>
+</div>
 <% end %>
-<hr>
 
+<hr>
 <% @company.jobs.each do |job| %>
   <% if collaborator_signed_in? && @company.is_same_company?(current_collaborator) %>
-    <p><b>Vaga: </b><%= job.title_job %>
-    <br>
-    <%= link_to 'Informações de candidaturas', job_path(job), id:"job_#{job.id}" %></p>
+
+    <h5>Vaga: <%= job.title_job %></h5>
+    <h6 class="text_job"><%= link_to 'Informações de candidaturas', job_path(job), id:"job_#{job.id}", class:"btn btn-light" %></h6>
+
   <% else %>
-    <p>Vaga: <%= link_to job.title_job, job_path(job) %></p>
+    <h5>
+      Vaga: <%= link_to job.title_job, job_path(job) %>
+    </h5>
   <% end %>
 
-  <p>Descrição: <%= job.description %></p>
+  <div class="div_center">
+    <p>
+      Descrição: <%= job.description %>
+    </p>
 
-  <p>
-    Salario: <%= number_to_currency(job.salary_range, precision: 2, separator: ',') %>
-  </p>
+    <p>
+      Salario: <%= number_to_currency(job.salary_range, precision: 2, separator: ',') %>
+    </p>
 
-  <p>Nivel: <%= job.level %></p>
+    <p>
+      Nivel: <%= job.level %>
+    </p>
 
-  <% if collaborator_signed_in? && @company.is_same_company?(current_collaborator) %>
-    <p><%= link_to 'Editar job', edit_job_path(job) %></p>
-    <p><%= link_to 'Apagar', job_path(job), method: :delete, id: "delete_job_#{job.id}" %></p>
-  <% end %>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <% if collaborator_signed_in? && @company.is_same_company?(current_collaborator) %>
+        <p><%= link_to 'Editar job', edit_job_path(job), class: "btn btn-light btn-cadastra-job"%></p>
+        <p><%= link_to 'Apagar', job_path(job), method: :delete, id: "delete_job_#{job.id}", class: "btn btn-light btn-cadastra-job" %></p>
+      <% end %>
+    </div>
+  </div>
   <hr>
 <% end %>

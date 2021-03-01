@@ -1,58 +1,67 @@
-<%= link_to 'Voltar', root_path %>
-<h2>Detalhes da Vaga</h2>
-
-<p>Nome da vaga: <%= @job.title_job %></p>
-<p>Descrição: <%= @job.description %></p>
-<p>Salario: <%= number_to_currency(@job.salary_range, precision: 2, separator: ',') %></p>
-<p>Nive: <%= @job.level %></p>
-<p>Requisitos: <%= @job.requisite %></p>
-<p>Data Limite: <%= I18n.localize(@job.date_limit) %></p>
-<p>Quantidade de vagas: <%= @job.quantity %></p>
-<p>Status: <%= @job.status %></p>
+<%= link_to 'Voltar', root_path, class:"button btn btn-sm" %>
+<h3>Detalhes da Vaga</h3>
+<div class="div_center">
+  <p>Nome da vaga: <%= @job.title_job %></p>
+  <p>Descrição: <%= @job.description %></p>
+  <p>Salario: <%= number_to_currency(@job.salary_range, precision: 2, separator: ',') %></p>
+  <p>Nive: <%= @job.level %></p>
+  <p>Requisitos: <%= @job.requisite %></p>
+  <p>Data Limite: <%= I18n.localize(@job.date_limit) %></p>
+  <p>Quantidade de vagas: <%= @job.quantity %></p>
+  <p>Status: <%= @job.status %></p>
+</div>
 
 <% if collaborator_signed_in? && @job.company.collaborators.include?(current_collaborator) %>
-  <p><%= link_to 'Editar job', edit_job_path(@job) %></p>
-<hr>
+  <div class="div_center">
+    <%= link_to 'Editar job', edit_job_path(@job), class:"btn btn-primary" %>
+  </div>
+  <hr>
 
-<h3>Candidaturas recebidas: <%= @job.applications.count %></h3>
-
+  <h3>Candidaturas recebidas: <%= @job.applications.count %></h3>
+  <hr>
   <% @job.applications.each do |application| %>
-    <p>
-      Candidato: <%= application.candidate.name %> | 
-      <%= application.candidate.email %> | 
-      <%= t(application.status) %>
-    </p>
 
-    <% unless application.refuse_msg.nil? %>
-      <p>
-        Motivo: <%= application.refuse_msg %>
-      </p>
-    <% end %>
+    <div class="custom_form_search collaborator_home">
+      <p>Candidato: <%= application.candidate.name %></p>
+      <p>E-mail: <%= application.candidate.email %></p>
+      <p>Status: <%= t(application.status) %><p>
+    </div>
 
-    <% if Proposal.can_add_proposal?(application) %>
-      <p>
-        <%= link_to 'Enviar proposta', new_proposal_path(proposal: { id: application }) %>
-      </p>
-    <% end %>
+    <div class="div_center">
+      <% unless application.refuse_msg.nil? %>
+        <p>
+          Motivo: <%= application.refuse_msg %>
+        </p>
+      <% end %>
 
-    <% if application.proposals.any? %>
-      <h4>Proposta</h4>
-      <% proposal = application.proposals.last  %>
-        <p>Status: <%= proposal.status %></p>
-        <p>Mensagem: <%= proposal.message %></p>
-        <p>Salario: <%= number_to_currency(proposal.wage, precision: 2, separator: ',') %></p>
-        <p>Data de inicio: <%= I18n.localize(proposal.date_init) %></p>
-    <% end %>
+      <% if Proposal.can_add_proposal?(application) %>
+        <p>
+          <%= link_to 'Enviar proposta', new_proposal_path(proposal: { id: application }) %>
+        </p>
+      <% end %>
 
+      <% if application.proposals.any? %>
+        <strong>Proposta:</strong>
+        <% proposal = application.proposals.last  %>
+          <p>Status: <%= proposal.status %></p>
+          <p>Mensagem: <%= proposal.message %></p>
+          <p>Salario: <%= number_to_currency(proposal.wage, precision: 2, separator: ',') %></p>
+          <p>Data de inicio: <%= I18n.localize(proposal.date_init) %></p>
+          <hr>
+      <% end %>
+    </div>
+    <hr>
     <% unless application.denied? %>
-      <p><%= link_to 'Cancelar candidatura', edit_application_path(application) %></p>
+      <div class="div_center">
+        <%= link_to 'Cancelar candidatura', edit_application_path(application), class: "btn btn-danger" %>
+      </div>
     <% end %>
-
   <% end %>
 <% end %>
 
 <% if @job.available? && not(collaborator_signed_in?)%>
-  <p>
-    <%= link_to  'Candidatar', applications_path(job: { id: @job }), method: :post %>
-  </p>
+  <div class="div_center">
+    <%= link_to  'Candidatar', applications_path(job: { id: @job }), method: :post, class: "btn btn-primary"  %>
+  </div>
 <% end %>
+<br>

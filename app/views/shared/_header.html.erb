@@ -1,44 +1,72 @@
+<div class="container"> 
+  <h2>
+    <%= link_to t(:employment_system_title), root_path %> 
+    <span class= "icones"><i class="bi bi-shop"></i></span>
+  </h2>
 
-<h2>
-  <%= link_to t(:employment_system_title), root_path %> 
-  <span class= "icones"><i class="bi bi-shop"></i></span>
-</h2>
+  <% if collaborator_signed_in? %> 
 
+    <p class="collaborator_home">
 
-<% if collaborator_signed_in? %> 
-
-  <p>
-    <%= current_collaborator.email %> | 
-    Empresa: <%= link_to current_collaborator.company.name, company_path(current_collaborator.company) %> | 
-    <%= link_to 'Dashboard', collaborators_path %> | 
-    <%= link_to "Logout", destroy_collaborator_session_path, method: :delete %>
-  </p>
-
-<% elsif candidate_signed_in? %>
-
-  <p>
-    <%= current_candidate.email %> | 
-    <%= link_to 'Dashboard', candidates_path %> | 
-    <%= link_to "Logout", destroy_collaborator_session_path, method: :delete %>
-  </p>
-
-<% else %>
-
-  <ul class="nav nav-pills nav-fill">
-    <li class="nav-item"> 
-      <span class="candidat-collab">
-        <i class="bi bi-building"></i>
+      <span>
+        <%= current_collaborator.email %>
       </span>
-      <%= link_to "Empresa", new_collaborator_session_path, class: "nav-link" %>
-    </li>
-    <li class="nav-item">
-      <span class="candidat-collab"> 
-        <i class="bi bi-people"></i>
-      </span>
-      <%= link_to "Candidato", new_candidate_session_path, class: "nav-link" %>
-    </li>
-  </ul>
 
-<% end %>
+      <span>
+        Empresa: <%= link_to current_collaborator.company.name, company_path(current_collaborator.company) %>
+      </span>
+
+      <span>
+        <%= link_to 'Dashboard', collaborators_path %>
+      </span>
+
+      <span>
+        <%= link_to destroy_collaborator_session_path, class:"btn btn-light", method: :delete do %>
+          Logout
+          <i class="bi bi-box-arrow-right"></i>
+        <%end%>
+      </span>
+
+    </p>
+
+  <% elsif candidate_signed_in? %>
+
+    <p class="collaborator_home">
+
+      <span>
+        <%= current_candidate.email %>
+      </span> 
+
+      <span>
+        <%= link_to 'Dashboard', candidates_path %>
+      </span>
+
+      <span>
+        <%= link_to destroy_candidate_session_path, class:"btn btn-light", method: :delete do %>
+          Logout
+          <i class="bi bi-box-arrow-right"></i>
+        <%end%>
+      </span>
+
+    </p>
+
+  <% else %>
+
+    <ul class="nav nav-pills nav-fill">
+      <li class="nav-item"> 
+        <span class="candidat-collab">
+          <i class="bi bi-building"></i>
+        </span>
+        <%= link_to "Empresa", new_collaborator_session_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <span class="candidat-collab"> 
+          <i class="bi bi-people"></i>
+        </span>
+        <%= link_to "Candidato", new_candidate_session_path, class: "nav-link" %>
+      </li>
+    </ul>
+  <% end %>
+</div>
 
 <%= render partial: 'shared/search_form' %>

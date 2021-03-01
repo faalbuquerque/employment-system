@@ -9,7 +9,7 @@
                    resource: resource.class.model_name.human.downcase)
          %>
       </h3>
-      <div class="alert alert-dismissible fade show alerta-error" role="alert">
+      <div class="alert alert-dismissible fade show alerta-error div_alerts_notices" role="alert">
         <% resource.errors.full_messages.each do |message| %>
           <p class="alert alert-warning"><%= message %>!</p>
         <% end %>

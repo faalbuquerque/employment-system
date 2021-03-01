@@ -1,44 +1,46 @@
-<%= link_to  'Voltar', applications_path %>
+<%= link_to  'Voltar', applications_path, class:"button btn btn-sm" %>
 
-<h2>Detalhes da Candidatura</h2>
-<hr>
+<div class="div_center">
+  <h2>Detalhes da Candidatura</h2>
 
-<p> Vaga: <%= @job.title_job %></p>
-<p>Nivel: <%= @job.level %></p>
+  <p> Vaga: <%= @job.title_job %></p>
+  <p>Nivel: <%= @job.level %></p>
 
-<p>Situacao de sua candidatura: 
-  <span class='<%= @application.status %>'>
-    <%= t(@application.status) %>
-  </span>
-</p>
-
-<% if @application.denied? %>
-  <p>
-    Motivo: 
+  <p>Situacao de sua candidatura: 
     <span class='<%= @application.status %>'>
-      <%= @application.refuse_msg %>
+      <%= t(@application.status) %>
     </span>
   </p>
-<% end %>
 
-<p>Aceitando candidaturas: <%= @job.status %></p>
-<p>Descricao da vaga: <%= @job.description %></p>
-<p>Requisitos: <%= @job.requisite %></p>
-<p>Salario: <%= number_to_currency(@job.salary_range, precision: 2, separator: ',') %></p>
+  <% if @application.denied? %>
+    <p>
+      Motivo: 
+      <span class='<%= @application.status %>'>
+        <%= @application.refuse_msg %>
+      </span>
+    </p>
+  <% end %>
 
-<% unless @application.denied? %>
-  <p><%= link_to 'Cancelar candidatura', edit_application_path(@application) %></p>
-<% end %>
+  <p>Aceitando candidaturas: <%= @job.status %></p>
+  <p>Descricao da vaga: <%= @job.description %></p>
+  <p>Requisitos: <%= @job.requisite %></p>
+  <p>
+    Salario: <%= number_to_currency(@job.salary_range, precision: 2, separator: ',') %>
+  </p>
 
+  <% unless @application.denied? %>
+    <%= link_to 'Cancelar candidatura', edit_application_path(@application), class: "btn btn-danger" %>
+  <% end %>
 
-<% if @application.proposals.any? %>
-  <hr>
-  <h4>Proposta</h4>
-  <% proposal = @application.proposals.last  %>
-    <p>Status: <%= proposal.status %></p>
-    <p>Mensagem: <%= proposal.message %></p>
-    <p>Salario: <%= number_to_currency(proposal.wage, precision: 2, separator: ',') %></p>
-    <p>Data de inicio: <%= I18n.localize(proposal.date_init) %></p>
+  <% if @application.proposals.any? %>
+    <h3>Proposta:</h3>
+    <% proposal = @application.proposals.last  %>
+      <p>Status: <%= proposal.status %></p>
+      <p>Mensagem: <%= proposal.message %></p>
+      <p>Salario: <%= number_to_currency(proposal.wage, precision: 2, separator: ',') %></p>
+      <p>Data de inicio: <%= I18n.localize(proposal.date_init) %></p>
 
-    <p><%= link_to 'Responder proposta', edit_proposal_path(proposal) %></p>
-<% end %>
+      <%= link_to 'Responder proposta', edit_proposal_path(proposal), class: "btn btn-primary" %>
+      <br>
+  <% end %>
+</div>

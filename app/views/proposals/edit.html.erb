@@ -1,25 +1,31 @@
+<%= link_to 'Voltar', @application, class:"button btn btn-sm" %>
+
 <% @proposal.errors.any? do %>
   <% @proposal.errors.full_messages.each do |message| %>
     <p><%= message %></p>
   <% end %>
 <% end %> 
 
-<%= form_with model: @proposal, local: true do |form| %>
+<div class="form-group">
+  <%= form_with model: @proposal, local: true do |form| %>
 
-  <p>
-    <%= form.label :message, 'Mensagem' %>
-    <%= form.text_area :message %>
-  </p>
+    <div class="field form-group">
+      <%= form.label :message, 'Mensagem' %>
+      <%= form.text_area :message, class: "form-control" %>
+    </div>
 
-  <p>
-    <%= form.label :date_init, 'Data de inicio' %>
-    <%= form.date_field :date_init, value: @application.job.date_limit  %>
-  </p>
+    <div class="field form-group">
+      <%= form.label :date_init, 'Data de inicio' %>
+      <%= form.date_field :date_init, value: @application.job.date_limit, class: "form-control"  %>
+    </div>
 
-  <p>
-    <%= form.label :status, 'Resposta' %>
-    <%= form.select :status, Proposal.statuses.reject {|status| status == 'pendent'}.map { |key, value| [key.humanize, key] } , { include_blank: 'Escolha'}, { multiple: false } %>
-  </p>
+    <div class="field form-group">
+      <%= form.label :status, 'Resposta' %>
+      <%= form.select :status, Proposal.statuses.reject {|status| status == 'pendent'}.map { |key, value| [key.humanize, key] } , { include_blank: 'Escolha'}, { multiple: false } %>
+    </div>
 
-  <p><%= form.submit %></p>
-<% end %>
+    <div class="actions">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

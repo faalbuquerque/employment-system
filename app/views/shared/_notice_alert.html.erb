@@ -1,15 +1,17 @@
 <% if notice %>
-  <p class="notice_container">
-    <span class="custom_notice_msg alert alert-secondary notice bg-secondary text-light">
-      <%= notice %>
-    </span>
-  </p>
+  <div class="div_center">
+    <div class="alert alert-dismissible fade show alerta-error div_alerts_notices" role="alert">
+        <p class="alert alert-warning"><%= notice %></p>
+    </div>
+  <div>
 <% end %>
 
 <% if alert %>
-  <p class="notice_container">
-    <span class="custom_notice_msg alert alert-danger denied bg-secondary text-light">
-      <%= alert %>
-    </span>
-  </p>
+  <div class="div_center">
+    <div class="alert alert-dismissible fade show alerta-error div_alerts_notices" role="alert">
+        <p class="alert alert-warning"> <%= alert %> </p>
+    </div>
+  </div>
 <% end %>
+
+<%= javascript_pack_tag 'toggles'%>

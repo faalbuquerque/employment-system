@@ -1,14 +1,17 @@
-  <%= link_to  'Voltar', url_for(:back) %>
+<%= link_to 'Voltar', url_for(:back), class:"button btn btn-sm" %>
 
-  <p>Acesso de Candidato</p>
+<div class="div_center">
+  <h5>Acesso de Candidato</h5>
 
+  <br>
   <cite>Boas vindas <%= current_candidate.email %></cite>
+  <br>
 
   <p>
-    <%= link_to 'Editar Perfil', edit_candidate_registration_path %>
+    <%= link_to 'Editar Perfil', edit_candidate_registration_path, class: "btn btn-light" %>
   </p>
 
-   <p>
-    <%= link_to 'Candidaturas', applications_path %>
+  <p>
+    <%= link_to 'Candidaturas', applications_path, class: "btn btn-light" %>
   </p>
-  
+</div>
