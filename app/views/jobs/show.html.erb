@@ -22,9 +22,9 @@
   <% @job.applications.each do |application| %>
 
     <div class="custom_form_search collaborator_home">
-      <p>Candidato: <%= application.candidate.name %></p>
+      <p>Candidato: <strong><%= application.candidate.name %></strong></p>
       <p>E-mail: <%= application.candidate.email %></p>
-      <p>Status: <%= t(application.status) %><p>
+      <p>Status: <strong><%= t(application.status) %></strong><p>
     </div>
 
     <div class="div_center">
@@ -47,15 +47,15 @@
           <p>Mensagem: <%= proposal.message %></p>
           <p>Salario: <%= number_to_currency(proposal.wage, precision: 2, separator: ',') %></p>
           <p>Data de inicio: <%= I18n.localize(proposal.date_init) %></p>
-          <hr>
       <% end %>
     </div>
-    <hr>
+
     <% unless application.denied? %>
       <div class="div_center">
         <%= link_to 'Cancelar candidatura', edit_application_path(application), class: "btn btn-danger" %>
       </div>
     <% end %>
+    <hr>
   <% end %>
 <% end %>
 
