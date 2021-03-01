@@ -28,7 +28,7 @@ class ProposalsController < ApplicationController
   def update
     @proposal = @application.proposals.last
     message = 'Resposta enviada!'
-    return redirect_to @application, notice: message if update_proposal_application
+    return redirect_to @application, notice: message if @proposal.update_proposal_application(proposal_params)
 
     flash.now[:alert] = 'Oops, erro ao enviar resposta.'
     render :edit
@@ -59,10 +59,5 @@ class ProposalsController < ApplicationController
   def check_application_denied_or_approved
     message = 'Proposta já finalizada!'
     return redirect_back(fallback_location: root_path, notice: message) if @application.denied? || @application.approved?
-  end
-
-  def update_proposal_application
-    @proposal.application.update_attribute(:status, 'approved') if proposal_params[:status] == 'accepted'
-    @proposal.update(proposal_params.merge(wage: @proposal.wage))
   end
 end

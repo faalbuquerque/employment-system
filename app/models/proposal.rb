@@ -32,4 +32,9 @@ class Proposal < ApplicationRecord
       Proposal.find(tmp_params[:id]).application
      end
   end
+
+  def update_proposal_application(tmp_params)
+    self.application.update_attribute(:status, 'approved') if tmp_params[:status] == 'accepted'
+    self.update(tmp_params.merge(wage: self.wage))
+  end
 end
