@@ -2,19 +2,13 @@ require 'rails_helper'
 
 feature 'Candidate edits register' do
   scenario 'successfuly' do
-    Candidate.create!(email: 'candidate@test.com', name: 'Tester',
+    candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester',
                       cpf: '33333333333', telephone: '11922222222',
                       bio: 'Testando as coisas', password: 'password')
 
-    visit root_path
-    click_on 'Candidato'
+    login_as candidate, scope: :candidate
 
-    fill_in 'Email', with: 'candidate@test.com'
-    fill_in 'Password', with: 'password'
-    click_on 'Log in'
-
-    click_on 'Dashboard'
-
+    visit candidates_path
     click_on 'Editar Perfil'
 
     fill_in 'Email', with: 'candidate@test.com'
@@ -28,18 +22,12 @@ feature 'Candidate edits register' do
   end
 
   scenario 'blank fields' do
-    Candidate.create!(email: 'candidate@test.com', name: 'Tester', 
-                      cpf: '33333333333', telephone: '11922222222', 
-                      bio: 'Testando as coisas',password: 'password')
+    candidate = Candidate.create!(email: 'candidate@test.com', name: 'Tester',
+                                  cpf: '33333333333', telephone: '11922222222',
+                                  bio: 'Testando as coisas', password: 'password')
 
-    visit root_path
-    click_on 'Candidato'
-
-    fill_in 'Email', with: 'candidate@test.com'
-    fill_in 'Password', with: 'password'
-    click_on 'Log in'
-
-    click_on 'Dashboard'
+    login_as candidate, scope: :candidate
+    visit candidates_path
 
     click_on 'Editar Perfil'
 

@@ -36,53 +36,17 @@ feature 'Collaborator edits jobs' do
     expect(page).to  have_content 'Status: unavailable'
   end
 
-  scenario 'blank fields' do
-    company = Company.create!(name: 'tester')
-    admin = Collaborator.create!(email: 'test@tester.com', password: 'password', 
-                                 company: company)
-
-     job = Job.create!(title_job: 'Desenvolvedor', 
-                       description: 'Desenvolvedor rails', salary_range: '3000', level: 'senior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
-
-    login_as admin, scope: :collaborator
-
-    visit root_path
-    click_on admin.company.name
-    click_on 'Editar job'
-
-    fill_in 'Nome', with: ''
-    fill_in 'Descrição', with: ''
-    fill_in 'Salario', with: ''
-    fill_in 'Requisitos', with: ''
-    fill_in 'Data limite', with: ''
-    fill_in 'Quantidade de vagas', with: ''
-
-    click_on 'Atualizar Job'
-
-    expect(page).to  have_content 'Title job não pode ficar em branco'
-    expect(page).to  have_content 'Description não pode ficar em branco'
-    expect(page).to  have_content 'Salary range não pode ficar em branco'
-    expect(page).to  have_content 'Requisite não pode ficar em branco'
-    expect(page).to  have_content 'Quantity não pode ficar em branco'
-  end
-
   scenario 'failure, cant enable job with date in the past' do
     company = Company.create!(name: 'tester')
     admin = Collaborator.create!(email: 'test@tester.com', password: 'password', 
                                  company: company)
 
-     job = Job.create!(title_job: 'Desenvolvedor', 
+    job = Job.create!(title_job: 'Desenvolvedor', 
                        description: 'Desenvolvedor rails', salary_range: '3000', level: 'senior', requisite: 'Experiencia com Git', date_limit: '2022-01-01', quantity: '3', company: company, status: 'available')
     job.update_attribute(:date_limit, Date.new(1900,01,02))
 
     login_as admin, scope: :collaborator
-
-    visit root_path
-    click_on admin.company.name
-    click_on 'Editar job'
-
-    select 'available', from: 'Status'
-
+    visit edit_job_path(Job.last)
     click_on 'Atualizar Job'
 
     expect(page).to  have_content 'Date limit não pode ser no passado!'
