@@ -116,14 +116,24 @@ Proposta
 <br>
 
 <h2 align="center"> Preview: </h2>
-<br>
+
 <div align="center">
 
-  ![gif_do_projeto](git_images/gifs/screen.gif)
+  ![gif_do_projeto](git_images/screen.gif)
 
 <div>
 
 <br>
+<br>
+
+<h2 align="center"> Diagrama de Entidade - Relacionamento: </h2>
+
+<div align="center">
+
+  ![gif_do_projeto](git_images/diagram.png)
+
+<div>
+
 <!-- 20?? and still with marquee, old but gold =) -->
 <marquee>
   By Fabiane Albuquerque =)

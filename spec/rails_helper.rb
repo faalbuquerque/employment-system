@@ -66,9 +66,8 @@ RSpec.configure do |config|
 
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
-    # Escolha um framework de teste:
-    with.test_framework :rspec
-    with.library :rails
+      with.test_framework :rspec
+      with.library :rails
     end
   end
 end
