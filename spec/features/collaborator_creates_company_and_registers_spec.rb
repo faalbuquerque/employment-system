@@ -37,14 +37,19 @@ feature 'Collaborator creates company and registers' do
 
   scenario 'is already registered' do
     company = Company.create!(name: 'teste')
+    Collaborator.create!(email: 'test@test.com', password: 'password',
+                         company: company)
 
-    collaborator = Collaborator.create!(email: 'test@test.com', password: 'password',
-    company: company)
+    visit root_path
 
-    collaborator = Collaborator.new(email: 'test@test.com', password: 'password',
-    company: company)
+    click_on 'Empresa'
+    click_on 'Sign up'
 
-    expect(collaborator.valid?).to_not eq(true)
-    expect(collaborator.errors[:email]).to include('já está em uso')
+    fill_in 'Email', with: 'test@test.com'
+    fill_in 'Password', with: 'password2'
+    fill_in 'Password confirmation', with: 'password2'
+    click_on 'Sign up'
+
+    expect(page).to have_content 'Email já está em uso'
   end
 end

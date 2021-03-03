@@ -21,10 +21,16 @@ feature 'Candidate Register' do
   end
 
   scenario 'blank fields' do
-    candidate = Candidate.new(email:'', password:'')
+    visit root_path
+    click_on 'Candidato'
+    click_on 'Sign up'
 
-    expect(candidate.valid?).to_not eq(true)
-    expect(candidate.errors[:email]).to include('não pode ficar em branco')
-    expect(candidate.errors[:password]).to include('não pode ficar em branco')
+    fill_in 'Email', with: ''
+    fill_in 'Password', with: ''
+    fill_in 'Password confirmation', with: ''
+    click_on 'Sign up'
+
+    expect(page).to  have_content 'Email não pode ficar em branco'
+    expect(page).to  have_content 'Password não pode ficar em branco'
   end
 end

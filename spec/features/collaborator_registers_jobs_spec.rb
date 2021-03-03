@@ -33,24 +33,6 @@ feature 'Collaborator registers jobs' do
     expect(page).to  have_content '3'
   end
 
-  scenario 'blank fields' do
-    company = Company.create!(name: 'tester')
-    collaborator = Collaborator.create!(email: 'testa@tester.com', 
-                                        password: 'password', 
-                                        company: company)
-
-    job = Job.new(title_job: '', description: '', salary_range: '', 
-                      level: 'senior', requisite: '', date_limit: '2022-01-01', 
-                      quantity: '', company: company, status: 'available')
-
-    expect(job.valid?).to_not eq(true)
-    expect(job.errors[:title_job]).to include('não pode ficar em branco')
-    expect(job.errors[:description]).to include('não pode ficar em branco')
-    expect(job.errors[:salary_range]).to include('não pode ficar em branco')
-    expect(job.errors[:requisite]).to include('não pode ficar em branco')
-    expect(job.errors[:quantity]).to include('não pode ficar em branco')
-  end
-
   scenario 'default deadline test in date' do
     last_date = 30.days.from_now
     day = last_date.day
@@ -86,6 +68,31 @@ feature 'Collaborator registers jobs' do
     expect(page).to  have_content  "#{day}/#{month}/#{year}"
     expect(page).to  have_content '33'
     expect(page).to  have_content 'available'
+  end
+
+  scenario 'blank fields' do
+    company = Company.create!(name: 'test')
+    admin = Collaborator.create!(email: 'test@test.com', password: 'password', 
+                                 company: company)
+
+    login_as admin, scope: :collaborator
+    visit root_path
+
+    click_on admin.company.name
+    click_on 'Cadastrar Job'
+
+    fill_in 'Nome', with: ''
+    fill_in 'Descrição', with: ''
+    fill_in 'Salario', with: ''
+    fill_in 'Requisitos', with: ''
+    fill_in 'Quantidade de vagas', with: ''
+    click_on 'Criar Job'
+
+    expect(page).to  have_content 'Title job não pode ficar em branco'
+    expect(page).to  have_content 'Description não pode ficar em branco'
+    expect(page).to  have_content 'Salary range não pode ficar em branco'
+    expect(page).to  have_content 'Requisite não pode ficar em branco'
+    expect(page).to  have_content 'Quantity não pode ficar em branco'
   end
 
   scenario 'failure, date cant be in the past' do

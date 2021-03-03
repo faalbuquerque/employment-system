@@ -43,13 +43,4 @@ feature 'Collaborator login' do
     expect(page).to_not have_content 'Boas vindas test@teste.com'
     expect(page).to_not have_content 'Empresa: teste'
   end
-
-  scenario 'not valid when email is blank' do
-    company = Company.create!(name:'teste')
-    collaborator = Collaborator.new(email:'',
-                                    password:'123456',
-                                    company: company)
-
-    expect(collaborator.valid?).to_not eq(true)
-  end
 end
