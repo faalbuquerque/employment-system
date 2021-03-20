@@ -9,11 +9,11 @@ class HomeController < ApplicationController
   private
 
   def fetch_jobs
-    Job.where('title_job like ? OR description like ?', "%#{params[:q]}%", "%#{params[:q]}%")
+    Job.where('lower(title_job) LIKE lower(?) OR lower(description) LIKE lower(?)', "%#{params[:q]}%", "%#{params[:q]}%")
        .where(status: 'available')
   end
 
   def fetch_companies
-    Company.where('name like ? OR site like ?', "%#{params[:q]}%", "%#{params[:q]}%")
+    Company.where('lower(name) LIKE lower(?) OR lower(site) LIKE lower(?)', "%#{params[:q]}%", "%#{params[:q]}%")
   end
 end
