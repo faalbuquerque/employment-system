@@ -1,0 +1,13 @@
+<h1>Nova vaga</h1>
+<h2>
+  <%= @job.title_job  %>
+</h2>
+<p>
+  Uma nova vaga de: <%= @job.company.name %>
+</p>
+<p>
+  Salario: <%= number_to_currency(@job.salary_range, precision: 2, separator: ',') %>
+</p>
+<p>
+  <%= link_to 'Mais detalhes da vaga aqui', job_url(@job) %>
+</p>

@@ -14,6 +14,14 @@ class Job < ApplicationRecord
   validates :quantity, presence: true
   validate :expiration_date_cannot_be_in_the_past
 
+  after_save :new_job_notify
+
+  def new_job_notify
+    Candidate.all.each do |candidate|
+      NotificationsMailer.new_job(candidate: candidate, job: self).deliver_now
+    end
+  end
+
   def is_date_in_the_past?
     !!(date_limit.present? && date_limit < Date.today)
   end

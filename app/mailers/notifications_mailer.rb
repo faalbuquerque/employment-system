@@ -12,4 +12,12 @@ class NotificationsMailer < ApplicationMailer
     mail to: @job.company.collaborators.first.email,
     subject: 'Houve uma nova candidatura'
   end
+
+  def new_job(**args)
+    @candidate = args[:candidate]
+    @job = args[:job]
+
+    mail to: @candidate.email,
+    subject: 'Nova vaga quentinha!'
+  end
 end

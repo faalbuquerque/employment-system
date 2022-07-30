@@ -6,4 +6,7 @@ class NotificationsPreview < ActionMailer::Preview
     NotificationsMailer.new_appliance
   end
 
+  def new_job
+    NotificationsMailer.new_job(candidate: Candidate.first, job: Job.first)
+  end
 end
