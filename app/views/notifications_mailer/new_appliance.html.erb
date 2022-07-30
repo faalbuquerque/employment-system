@@ -1,0 +1,10 @@
+<h1>Nova candidatura</h1>
+
+<p>
+  Uma nova candidatura de: <%= @candidate.name.truncate(15) %> 
+  para vaga de: <%= @job.title_job.truncate(30) %>
+</p>
+
+<p>
+  <%= link_to 'Perfil do candidato', candidates_url(@candidate) %>
+</p>
